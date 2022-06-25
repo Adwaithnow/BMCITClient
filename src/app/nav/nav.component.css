@@ -1,0 +1,9 @@
+.signup{
+    background-color: #2c4cc4;
+    border-color: #2a47b8;
+}
+.signup:hover {
+    color: #fff;
+    background-color: #686cf3;
+    border-color: #2a47b8;
+}

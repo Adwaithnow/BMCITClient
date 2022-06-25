@@ -1,0 +1,8 @@
+html, body {
+    min-height: 90%;
+    height: auto;
+    margin: 0;
+  }
+.container{
+    z-index: 100;
+}
