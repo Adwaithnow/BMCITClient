@@ -1,0 +1,12 @@
+.boxes {
+  min-height: 15px;
+  min-width: 75px;
+  padding: 6px 12px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  background: #fafafa;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  width: 190px;
+}

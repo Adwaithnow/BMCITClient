@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainServiceService } from '../Service/train-service.service';
-import { UserServiceService } from '../Service/user-service.service';
+import { TrainServiceService } from '../../../Service/train-service.service';
+import { UserServiceService } from '../../../Service/user-service.service';
 
 @Component({
   selector: 'app-vhome',
