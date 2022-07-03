@@ -1,5 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild  } from '@angular/core';
+import { Station } from 'src/app/Models/Station';
+import { StationService } from 'src/app/Service/station.service';
 import { TrainServiceService } from '../../../Service/train-service.service';
+import { AddstationComponent } from '../StationManagement/addstation/addstation.component';
 
 @Component({
   selector: 'app-train-management',
@@ -8,11 +11,19 @@ import { TrainServiceService } from '../../../Service/train-service.service';
 })
 export class TrainManagementComponent implements OnInit {
   trains: any[] = [];
+  @ViewChild(AddstationComponent) child!:any
+  isUpdateStation:boolean=false;
+  UpdateStationDta:Station={
+    sId: "",
+    stationName: "",
+    stationShortCode: "",
+    stationLocation: []
+  }
   id: string = '';
   updatetoggle: boolean = false;
   stations: any[] = [];
   routes: any[] = [];
-  constructor(private train: TrainServiceService) { }
+  constructor(private train: TrainServiceService,private stationservice:StationService) { }
   displayedit: boolean = false;
  
   ngOnInit(): void {
@@ -62,4 +73,15 @@ export class TrainManagementComponent implements OnInit {
   
     // document.ge
   }
+  UpdateStation(item:Station){
+   this.UpdateStationDta=item;
+   this.child.isUpdateStation=!this.child.isUpdateStation;
+   this.child.openModal();
+   console.log()
+  }
+  DeleteStation(id:string){
+    this.stationservice.DeleteOneStation(id).subscribe()
+    window.location.reload()
+  }
+
 }

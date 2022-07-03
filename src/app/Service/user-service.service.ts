@@ -14,7 +14,11 @@ export class UserServiceService {
 //  GetAllStations():Observable<any[]>{
 //     return this.http.get<[]>(this.baseUrl + 'Station/GetAllStations')
 //   }
+  // SearchStation(Model:any):Observable<any[]>{
+  //   return this.http.post<any[]>(this.baseUrl + 'TrainUser/SearchTrain',Model)
+  // }
   SearchStation(Model:any):Observable<any[]>{
-    return this.http.post<any[]>(this.baseUrl + 'TrainUser/SearchTrain',Model)
+    console.log('tres',Model)
+    return this.http.post<any[]>(this.baseUrl + 'Test/SearchTrain',Model)
   }
 }

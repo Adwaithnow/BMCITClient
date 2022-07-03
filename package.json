@@ -21,6 +21,7 @@
     "@fortawesome/angular-fontawesome": "^0.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@ng-select/ng-select": "8.0",
     "@popperjs/core": "^2.11.5",
     "angular-font-awesome": "^3.1.2",
     "angular-ng-autocomplete": "^2.0.8",

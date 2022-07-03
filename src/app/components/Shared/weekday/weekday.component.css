@@ -1,0 +1,15 @@
+.hl {
+    color: #495057;
+    border-color: #495057;
+}
+
+a {
+    padding: 2px;
+    margin: 2px;
+    color: gray;
+    text-decoration: none;
+    border: 1.8px solid grey;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}

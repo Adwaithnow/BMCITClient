@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Train } from 'src/app/Models/Train';
 import { TrainRes } from 'src/app/Models/trainres';
 import { TrainServiceService } from 'src/app/Service/train-service.service';
+import { NgSelectComponent } from '@ng-select/ng-select'
 
 @Component({
   selector: 'app-edit-train',
@@ -10,7 +11,20 @@ import { TrainServiceService } from 'src/app/Service/train-service.service';
 })
 export class EditTrainComponent implements OnInit {
   DaysRun: any[] = [];
+  selectedCars=[1]
   @Output() back = new EventEmitter();
+  daysrun = [
+    { id: 0, name: 'Sunday' },
+    { id: 1, name: 'Monday' },
+    { id: 2, name: 'Tuesday' },
+    { id: 3, name: 'Wednesday' },
+    { id: 4, name: 'Thursday' },
+    { id: 5, name: 'Friday' },
+    { id: 6, name: 'Saturday' },
+
+
+
+];
   model: TrainRes = {
     train_Id: "",
     trainNo: 0,

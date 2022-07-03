@@ -1,0 +1,147 @@
+
+<div class="card mt-2 mx-3" [formGroup]="form">
+  <div class="card-header">
+    <h5>Route Of</h5>
+    
+    <ng-select [items]="Trains"                
+    bindLabel="trainName"
+    dropdownPosition="auto"
+    bindValue="train_Id"                  
+    placeholder="Search Train"
+    [virtualScroll]="true"
+    formControlName="train_Id"
+    class="form-control"
+    [ngClass]="{ 'is-invalid':!train_id?.invalid && (form.get('train_id')?.dirty || form.get('train_id')?.touched)}" 
+    >
+</ng-select>
+    <!-- <input
+      [typeahead]="Trains"
+      id="Train"
+      [isAnimated]="true"
+      typeaheadOptionField="trainName"
+      [typeaheadScrollable]="true"
+      [typeaheadOptionsInScrollableView]="5"
+      [typeaheadWaitMs]="1"
+      (typeaheadOnSelect)="onSelect($event)"
+      class="form-control"
+      formControlName="train_id"
+      [ngClass]="{ 'is-invalid':!train_id?.invalid && (form.get('train_id')?.dirty || form.get('train_id')?.touched)}" 
+    /> -->
+    <div class="invalid-feedback">Please select a station.</div>
+  </div>
+  <div class="card-body">
+    <h5>Station</h5>
+    <hr />
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Station</th>
+          <th>Platform</th>
+          <th>Time Arrival</th>
+          <th>Time Departure</th>
+          <th>Distance</th>
+          <th>HaltTime</th>
+          <th>Day</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          formArrayName="stations"
+          *ngFor="let o of station.controls; let i = index"
+        >
+          <tr [formGroupName]="i">
+            <td>
+           
+              <!-- <input
+                [typeahead]="stations"
+                id="Train"
+                [isAnimated]="true"
+                typeaheadOptionField="stationName"
+                [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"
+                [typeaheadWaitMs]="1"
+                (typeaheadOnSelect)="onSelectStation($event,i)"
+                class="form-control"
+                formControlName="stationId"
+              /> -->
+              <ng-select [items]="stations"
+                
+                   bindLabel="stationName"
+                   dropdownPosition="auto"
+                   bindValue="sId"                  
+                   placeholder="Search Station"
+                   [virtualScroll]="true"
+                   class="form-control"
+                   [virtualScroll]="true"
+                   formControlName="stationId">
+        </ng-select>
+            </td>
+            <td>
+              <input
+              class="form-control"
+              type="number"
+              formControlName="platForm"
+            />
+                   
+            </td>
+            <td>
+              <input
+                class="form-control"
+                type="time"
+                formControlName="timeArrival"
+              />
+            </td>
+            <td>
+              <input
+                class="form-control"
+                type="time"
+                formControlName="timeDeparture"
+              />
+            </td>
+            <td>
+              <input
+                class="form-control"
+                type="number"
+                formControlName="distance"
+              />
+            </td>
+            <td>
+              <input
+                class="form-control"
+                type="number"
+                formControlName="haltTime"
+              />
+            </td>
+            <td>
+              <input
+              class="form-control"
+              type="number"
+              formControlName="day"
+            />
+            </td>
+            <td>
+              <button class="btn btn-sm" (click)="removeContact(i)">-</button>
+              <button class="btn btn-sm" (click)="addNewstation()">+</button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-center">
+    <button (click)="onSave()" class="btn btn-primary" >Save</button>
+  </div>
+</div>
+<div class="card mt-2 mx-3">
+  <div class="card-header">Result</div>
+  <div class="card-body">
+    <code>
+      <pre>
+        {{form.valid}}
+                {{ result | json }}
+            </pre
+      >
+    </code>
+  </div>
+</div>

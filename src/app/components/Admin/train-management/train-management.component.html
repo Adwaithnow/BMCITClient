@@ -78,7 +78,17 @@
           <tr *ngFor="let item of routes">
             <td>{{ item.rId }}</td>
             <td>{{ item.train_Id }}</td>
-            <td>{{ item.stations }}</td>
+            <td>
+              <!-- {{ item.stations }} -->
+              <ul *ngFor="let items of item.stations">
+                <li>{{items.platForm}}</li>
+                <li>{{items.timeArrival}}</li>
+                <li>{{items.timeArrival}}</li>
+                <li>{{items.timeArrival}}</li>
+                <li>{{items.timeArrival}}</li>
+
+              </ul>
+            </td>
             <td>
               <a class="btn btn-sm btn-primary mx-1">
                 <i class="bi bi-pencil"></i>
@@ -94,7 +104,15 @@
   </div>
   <div class="tab-pane fade" id="Station">
     <!--Station-->
+    
+   
     <div class="container mt-2">
+      <div class="row mt-2">
+        <div class="col">
+          <!-- Button trigger modal -->
+          <app-addstation  [model]="UpdateStationDta" ></app-addstation>
+        </div>
+      </div>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -110,10 +128,10 @@
             <td>{{ item.stationShortCode }}</td>
             <td>{{ item.stationLocation }}</td>
             <td>
-              <a class="btn btn-sm btn-primary mx-1">
+              <a class="btn btn-sm btn-primary mx-1" (click)="UpdateStation(item)">
                 <i class="bi bi-pencil"></i>
               </a>
-              <a class="btn btn-sm btn-danger">
+              <a class="btn btn-sm btn-danger" (click)="DeleteStation(item.sId)">
                 <i class="bi bi-trash-fill"></i>
               </a>
             </td>

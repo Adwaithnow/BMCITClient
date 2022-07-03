@@ -38,7 +38,7 @@
       </div>
 </div> -->
 
-<div class="first">
+<div *ngIf="!searchresult" class="first">
   <div class="container col-xl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-center g-lg-5 py-5  ">
         <div class="col-lg-7 text-center text-lg-start text-white bg-dark py-4">
@@ -107,6 +107,9 @@
         </div>
       </div>
     </div>
+</div>
+<div *ngIf="searchresult" class="container mt-3">
+<app-search-result [Model]="Model"></app-search-result>
 </div>
 <!-- <div class="ng-autocomplete">
   <ng-autocomplete 

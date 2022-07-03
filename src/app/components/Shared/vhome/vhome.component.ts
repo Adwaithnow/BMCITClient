@@ -14,16 +14,17 @@ export class VhomeComponent implements OnInit {
   keyword = 'stationName';
   constructor(private user:UserServiceService,private train:TrainServiceService) { }
   users:any;
+  searchresult:boolean=false;
   ngOnInit(): void {
     this.GetAllStation();
-    
   }
   GetAllStation(){
     this.train.GetAllStations().subscribe(res=>this.allstations=res)
   }
   SearchTrain(){
-    this.user.SearchStation(this.Model).subscribe({next:res=>this.Search=res,error:er=>console.log(er)});
-    console.log(this.Search)
+    this.searchresult=!this.searchresult;
+    // this.user.SearchStation(this.Model).subscribe({next:res=>this.Search=res,error:er=>console.log(er)});
+    // console.log(this.Search)
   }
   selectEvent(item:any) {
     this.Model.FromStation=item.sId;

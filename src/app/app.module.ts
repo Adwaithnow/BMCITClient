@@ -10,16 +10,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrainManagementComponent } from './components/Admin/train-management/train-management.component';
 import { AddTrainComponent } from './components/Admin/TrainManagement/add-train/add-train.component';
 import { EditTrainComponent } from './components/Admin/TrainManagement/edit-train/edit-train.component';
-import { AddRouteComponent } from './components/Admin/RouteManagement/add-route/add-route.component';
-import { EditRouteComponent } from './components/Admin/RouteManagement/edit-route/edit-route.component';
 import { SearchResultComponent } from './components/User/Booking/search-result/search-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { AddstationComponent } from './components/Admin/StationManagement/addstation/addstation.component';
-
-
+import { TestComponent } from './test/test.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CheckoutComponent } from './components/User/Booking/checkout/checkout.component';
+import { HistoryComponent } from './components/User/Booking/history/history.component';
+import { BookingComponent } from './components/Admin/booking/booking.component';
+import { RouteManagementComponent } from './components/Admin/route-management/route-management.component';
+import { UhomeComponent } from './components/User/uhome/uhome.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { SeatArrangeMentComponent } from './seat-arrange-ment/seat-arrange-ment.component';
+import { SearchstationComponent } from './components/Shared/searchstation/searchstation.component';
+import { WeekdayComponent } from './components/Shared/weekday/weekday.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,11 +35,18 @@ import { AddstationComponent } from './components/Admin/StationManagement/addsta
     TrainManagementComponent,
     AddTrainComponent,
     EditTrainComponent,
-    AddRouteComponent,
-    EditRouteComponent,
     SearchResultComponent,
     TestComponentComponent,
     AddstationComponent,
+    TestComponent,
+    CheckoutComponent,
+    HistoryComponent,
+    BookingComponent,
+    RouteManagementComponent,
+    UhomeComponent,
+    SeatArrangeMentComponent,
+    SearchstationComponent,
+    WeekdayComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,10 +54,12 @@ import { AddstationComponent } from './components/Admin/StationManagement/addsta
     HttpClientModule,
     FormsModule,
     AutocompleteLibModule,
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
+    NgSelectModule,
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

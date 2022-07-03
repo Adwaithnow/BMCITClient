@@ -1,0 +1,165 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+  }
+  
+  .train {
+    margin: 20px auto;
+    max-width: 250px;
+  }
+  
+  .exit {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem 0;
+  }
+  .exit div {
+    flex: 1;
+    background: #d8d8d8;
+    text-align: center;
+    justify-content: center;
+    height: 40px;
+    line-height: 40px;
+  }
+  .exit div:nth-child(2) {
+    flex: 0 1 20%;
+    background: #fff;
+  }
+  .exit.back {
+    flex-direction: row-reverse;
+  }
+  
+  .train-body {
+    border-right: 5px solid #d8d8d8;
+    border-left: 5px solid #d8d8d8;
+  }
+  
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .seats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  
+  .seat {
+    display: flex;
+    flex: 0 0 21%;
+    padding: 5px;
+    position: relative;
+  }
+  .seat:nth-child(2) {
+    margin-right: 15%;
+  }
+  .seat input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+  }
+  .seat input[type=checkbox]:checked + label {
+    background: #232a72;
+    -webkit-animation-name: rubberBand;
+    animation-name: rubberBand;
+    -webkit-animation-duration: 300ms;
+            animation-duration: 300ms;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+  }
+  .seat input[type=checkbox]:disabled + label {
+    background: #dddddd;
+    text-indent: -9999px;
+    overflow: hidden;
+  }
+  .seat input[type=checkbox]:disabled + label:after {
+    content: "X";
+    text-indent: 0;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+  .seat input[type=checkbox]:disabled + label:hover {
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  .seat label {
+    display: block;
+    color: #ffff;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5rem;
+    padding: 4px 0;
+    background: #4855e4;
+    border-radius: 5px;
+    -webkit-animation-duration: 300ms;
+            animation-duration: 300ms;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+  }
+ 
+  .seat label:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0px 2px #5C6AFF;
+  }
+  
+  @-webkit-keyframes rubberBand {
+    0% {
+      transform: scale3d(1, 1, 1);
+    }
+    30% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+      transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  @keyframes rubberBand {
+    0% {
+      transform: scale3d(1, 1, 1);
+    }
+    30% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+      transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  .rubberBand {
+    -webkit-animation-name: rubberBand;
+    animation-name: rubberBand;
+  }
