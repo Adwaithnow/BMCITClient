@@ -16,11 +16,18 @@ export class SearchResultComponent implements OnInit {
     toStation:'',
     date:''
   }
+  selectedCompartmentType:string = ''
   searchresult:any[]=[]
   fakeArray = new Array(4);
   constructor(private user:UserServiceService) { }
   weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-
+  CompartmentsForView(item:any){
+    return Object.keys(item.availability.compartments)
+  }
+  book(comp:any){
+    console.log(comp);
+    this.selectedCompartmentType = comp
+  }
   ngOnInit(): void {
     let weekday = new Map<number, string>([
         [0, "S"],
@@ -33,12 +40,12 @@ export class SearchResultComponent implements OnInit {
     ]);
     this.user.SearchStation(this.Model).subscribe(res=>{
       this.searchresult = res;
-      this.countAvailability();
+      this.reCountAvailability();
       console.log('n', this.searchresult);
     })
   }
 
-  countAvailability(): void {
+  reCountAvailability(): void {
     this.searchresult.forEach(sr => {
       sr.availability = { stations: {} }
       const stationIds=this.getStationIds(sr.stations)

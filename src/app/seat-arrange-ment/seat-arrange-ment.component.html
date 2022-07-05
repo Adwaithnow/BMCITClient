@@ -9,20 +9,20 @@
               <ol class="seats">
                 <li class="seat">
                   <input type="checkbox" (click)="additem(i,0)" [disabled]="!item[0]" id='{{i+1}}A' />
-                  <label for='{{i+1}}A'>{{i+1}}A</label>
+                  <label for='{{i+1}}A'>{{(i*4)+1}}</label>
                 </li>
                 
                 <li class="seat">
                   <input type="checkbox" id='{{i+1}}B' (click)="additem(i,1)" [disabled]="!item[1]"  />
-                  <label for='{{i+1}}B' >{{i+1}}B </label>
+                  <label for='{{i+1}}B' >{{(i*4)+2}}</label>
                 </li>
                 <li class="seat">
                   <input type="checkbox" id='{{i+1}}C' (click)="additem(i,2)" [disabled]="!item[2]" />
-                  <label for='{{i+1}}C'>{{i+1}}C</label>
+                  <label for='{{i+1}}C'>{{(i*4)+3}}</label>
                 </li>
                 <li class="seat">
                   <input type="checkbox" id='{{i+1}}D' (click)="additem(i,3)" [disabled]="!item[3]"/>
-                  <label for='{{i+1}}D'>{{i+1}}D</label>
+                  <label for='{{i+1}}D'>{{(i*4)+4}}</label>
                 </li>
               </ol>
             </li>
