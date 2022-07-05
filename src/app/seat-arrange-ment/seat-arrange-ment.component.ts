@@ -1,5 +1,5 @@
 import { NumberSymbol } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-seat-arrange-ment',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./seat-arrange-ment.component.css']
 })
 export class SeatArrangeMentComponent implements OnInit {
-  in:any;
+  @Input() SeatArrangemnt:any=[]
   fakeArray = [
   [1,1,1,1],
   [1,1,1,1],

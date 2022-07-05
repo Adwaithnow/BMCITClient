@@ -17,12 +17,12 @@
     <div class="card-body">
       <!--Test-->
       <div class="row">
-        <div *ngFor="let item of fakeArray" class="col">
+        <div *ngFor="let comp of CompartmentsForView(item)" class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Sleeper Class</h5>
-              <p class="card-text">AVAILABLE-0008</p>
-              <a href="#" class="btn btn-primary">Buy Now</a>
+              <h5 class="card-title">{{comp}}</h5>
+              <p class="card-text">AVAILABLE-{{item.availability.compartments[comp].available}}</p>
+              <a href="#" class="btn btn-primary" (click)="book(comp)">Buy Now</a>
             </div>
           </div>
         </div>
@@ -31,3 +31,5 @@
   </div>
   
 </div>
+{{selectedCompartmentType}}
+<app-seat-arrange-ment ></app-seat-arrange-ment>
