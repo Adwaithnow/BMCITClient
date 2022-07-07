@@ -1,9 +1,8 @@
-<div class="train">
+<div *ngFor="let item of fakeArray" class="train">
     <!--   <div class="exit exit--front train-body"></div> -->
-      <div class="exit front train-body">
+      <div  class="exit front train-body">
         <div>Toilet</div><div></div><div></div>
       </div>
-     
       <ol class="wagon train-body">
         <li *ngFor="let item of fakeArray;let i = index" class="row row">
               <ol class="seats">
@@ -28,31 +27,15 @@
             </li>
        
       </ol>
-
-      <!-- <ol class="seats">
-        <li class="seat">
-            <ng-container ></ng-container>
-          <input type="checkbox" [disabled]="!item[0][1]" id={{item[0][0]}} />
-          <label for={{item[0][0]}}>{{item[0][0]}}</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" [disabled]="!item[1][1]" id={{item[1][0]}}  />
-          <label for={{item[1][0]}} >{{item[1][0]}} </label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" [disabled]="!item[2][1]" id={{item[2][0]}} />
-          <label for={{item[2][0]}}>{{item[2][0]}}</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" [disabled]="!item[2][1]" id={{item[3][0]}} />
-          <label for={{item[3][0]}}>{{item[3][0]}}</label>
-        </li>
-      </ol> -->
       <div class="exit back train-body">
         <div>Toilet</div><div></div><div></div>
       </div>
+      
+      
+      
     <!--   <div class="exit exit--back train-body"></div> -->
     </div>
+
     <pre>
         
       {{ Seat | json }}

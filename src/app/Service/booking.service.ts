@@ -13,8 +13,8 @@ export class BookingService {
   CancelBookingById(Id:string){
     return this.http.patch<any>(this.baseUrl+"Booking/CancelBookingById",Id)
   }
-  GetAllBookingForAdmin(){
-    return this.http.get<any[]>(this.baseUrl+"Booking/GetAllBookingForAdmin")
+  GetAllBookingForAdminByTrainId(mode:any){
+    return this.http.post<any[]>(this.baseUrl+"Booking/GetAllBookingForAdminByTrainId",mode)
   }
   GetAllUpcomingBookingByUserId(Id:string){
     return this.http.get<any[]>(this.baseUrl+"Booking/GetAllUpcomingBookingByUserId/"+Id)

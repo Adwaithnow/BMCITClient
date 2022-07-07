@@ -7,15 +7,20 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./seat-arrange-ment.component.css']
 })
 export class SeatArrangeMentComponent implements OnInit {
-  @Input() SeatArrangemnt:any=[]
+  @Input() SeatArrangemnt:string=''
+  @Input() SearchResults:any[]=[]
   fakeArray = [
   [1,1,1,1],
   [1,1,1,1],
 ];
+  CompartmentRederer(item:any){
+    return Object.keys(item.availability.compartment)
+  }
+  // SelectedCoach:strin
   constructor() { }
   Seat:number[][]= [] 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
   additem(row: number,col:number) {
     let inde = this.Seat.findIndex(e => JSON.stringify(e) === JSON.stringify([row, col]))

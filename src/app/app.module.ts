@@ -27,6 +27,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SeatArrangeMentComponent } from './seat-arrange-ment/seat-arrange-ment.component';
 import { SearchstationComponent } from './components/Shared/searchstation/searchstation.component';
 import { WeekdayComponent } from './components/Shared/weekday/weekday.component';
+import { FeedbackComponent } from './components/Shared/feedback/feedback.component';
+import { PassengerDetailsComponent } from './components/Shared/passenger-details/passenger-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +49,8 @@ import { WeekdayComponent } from './components/Shared/weekday/weekday.component'
     SeatArrangeMentComponent,
     SearchstationComponent,
     WeekdayComponent,
+    FeedbackComponent,
+    PassengerDetailsComponent,
   ],
   imports: [
     BrowserModule,

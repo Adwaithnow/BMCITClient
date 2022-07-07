@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!selectedcompartment" class="container">
   <div *ngFor="let item of searchresult" class="card text-center my-3">
     <div class="card-header">
       <div class="container">
@@ -6,30 +6,31 @@
           <div class="col">Train No:{{item.trainNo}}</div>
           <div class="col">Train No:{{item.trainName}}</div>
           <!-- <div class="col">Runs on : M T W T F S S</div> -->
-          <div class="col">Runs on : 
+          <div class="col">Runs on :
             <!-- {{1+1}} -->
-            <app-weekday *ngFor="let day of weekDays; let i = index"
-             [day]="day" [highlight]="item.daysRun.includes(i)">
+            <app-weekday *ngFor="let day of weekDays; let i = index" [day]="day" [highlight]="item.daysRun.includes(i)">
             </app-weekday>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card-body">
-      <!--Test-->
-      <div class="row">
-        <div *ngFor="let comp of CompartmentsForView(item)" class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{comp}}</h5>
-              <p class="card-text">AVAILABLE-{{item.availability.compartments[comp].available}}</p>
-              <a href="#" class="btn btn-primary" (click)="book(comp)">Buy Now</a>
+      <div class="card-body">
+        <!--Test-->
+        <div class="row">
+          <div *ngFor="let comp of CompartmentsForView(item)" class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{comp}}</h5>
+                <p class="card-text">AVAILABLE-{{item.availability.compartmentTypes[comp].available}}</p>
+                <a class="btn btn-primary" (click)="book(comp)">Buy Now</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
 </div>
-{{selectedCompartmentType}}
-<app-seat-arrange-ment ></app-seat-arrange-ment>
+<div *ngIf="selectedcompartment" class="container">
+  <app-seat-arrange-ment [SeatArrangemnt]="selectedCompartmentType" [SearchResults]="searchresult">
+  </app-seat-arrange-ment>
+</div>

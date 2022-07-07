@@ -11,6 +11,7 @@ export class SearchResultComponent implements OnInit {
   // @Input() fromStation:string='ef15b875-2e77-4523-8e54-3879b0eb2e1a';
   // @Input() toStation:string='9296c720-4fb1-4b29-8ef7-8385f23e9d5d';
   // @Input() date:string='2022-07-03';
+  selectedcompartment:boolean=false;
   @Input() public Model:any={
     fromStation:'',
     toStation:'',
@@ -22,11 +23,14 @@ export class SearchResultComponent implements OnInit {
   constructor(private user:UserServiceService) { }
   weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
   CompartmentsForView(item:any){
-    return Object.keys(item.availability.compartments)
+    return Object.keys(item.availability.compartmentTypes)
   }
   book(comp:any){
     console.log(comp);
     this.selectedCompartmentType = comp
+    
+    this.selectedcompartment=true
+    console.log(this.selectedcompartment);
   }
   ngOnInit(): void {
     let weekday = new Map<number, string>([
@@ -47,38 +51,43 @@ export class SearchResultComponent implements OnInit {
 
   reCountAvailability(): void {
     this.searchresult.forEach(sr => {
-      sr.availability = { stations: {} }
+      sr.availability = {}
       const stationIds=this.getStationIds(sr.stations)
       console.log({ stationIds })
-      sr.chartStation.forEach((chart:any, ci:number) => {
-        sr.availability.stations[chart.sId] = {}
-        if(!stationIds.includes(chart.sId)) return
-        sr.availability.stations[chart.sId].compartments =
-          this.summarizeCompartmentAvailability(chart.compartments)
+      let compartmentsToCheck: any[] = []
+      sr.chartStation.forEach((station:any) => {
+        if(!stationIds.includes(station.sId)) return
+        compartmentsToCheck.push(...station.compartments)
       })
-      sr.availability.compartments = this.summarizeCompartmentTypes(sr.availability.stations)
+      sr.availability.compartments = this.summarizeCompartmentAvailability(compartmentsToCheck)
+      sr.availability.compartmentTypes = this.summarizeCompartmentTypes(sr.availability.compartments)
     })
   }
 
   summarizeCompartmentAvailability(compartments:any) {
-    const ava: {[key:string]: any} = {}
+    const availability: {[key:string]: any} = {}
     compartments.forEach((comp:any)=> {
-      if(!ava[comp.name]) {
-        ava[comp.name] = {
+      if(!availability[comp.name]) {
+        availability[comp.name] = {
           type: comp.type,
           seats: comp.seats,
         }
       }
-      for (let i = 0; i < ava[comp.name].seats.length; i++) {
+      console.log(availability[comp.name].seats.length);
+      for (let i = 0; i < availability[comp.name].seats.length; i++) {
         // compare and update with the greatest
+        for (let j= 0; j < availability[comp.name].seats[i].lenglth; j++) {
+          if(availability[comp.name].seats[i][j] < comp.seats[i][j]){
+            availability[comp.name].seats[i][j] = comp.seats[i][j]
+          } 
+        }
         // if(comp.seats[i]) ava[comp.name].seats[i] = comp.seats[i]
-        if(ava[comp.name].seats[i] < comp.seats[i]) ava[comp.name].seats[i] = comp.seats[i]
       }
     })
-    for (let k in ava) {
-      ava[k]['stats'] = this.summarizeSeatsAvailability(ava[k].seats)
+    for (let k in availability) {
+      availability[k]['stats'] = this.summarizeSeatsAvailability(availability[k].seats)
     }
-    return ava
+    return availability
   }
   summarizeSeatsAvailability(seats:any) {
     let booked = 0
@@ -110,41 +119,21 @@ export class SearchResultComponent implements OnInit {
       coaches[type] ? coaches[type]++ : coaches[type] = 1
     }
     return coaches
- }
+  }
 
-  summarizeCompartmentTypes(stations:any) {
+  summarizeCompartmentTypes(compartments:any) {
     let coaches: {[key: string]: any} = {};
-    console.log('summarizeCompartmentTypes:', stations)
-    const comps = stations[Object.keys(stations)[0]].compartments
-    for (let comp in comps) {
-      const { type } = comps[comp]
-      if(!coaches[type]) coaches[type] = { count: 0 }
+    console.log('summarizeCompartmentTypes:', compartments)
+    for (let comp in compartments) {
+      const { type } = compartments[comp]
+      if(!coaches[type]) coaches[type] = { 
+        count: 0,
+        booked: 0,
+        available: 0,
+      }
       coaches[type].count++
-    }
-    for (let stn in stations) {
-      let _chc: {[key:string]: any} = {}
-      for(let co in stations[stn].compartments ){
-        for (let ch in coaches) {
-          if(!_chc[ch]) _chc[ch] = {
-            available: 0,
-            booked: 0,
-          }
-          // if(!_chc[ch]['available']) _chc[ch]['available'] = 0
-          // if(!coaches[ch].available) coaches[ch].available = 0
-          // console.log({stations, stn, _chc, co, ch})
-          // stns -> comps -> |chs|
-          if(stations[stn].compartments[co].type == ch) {
-            _chc[ch].available += stations[stn].compartments[co].stats.available
-            _chc[ch].booked += stations[stn].compartments[co].stats.booked
-          }
-        }
-      }
-      for (let ch in coaches) {
-        if(!coaches[ch].booked) coaches[ch].booked = _chc[ch].booked
-        if(!coaches[ch].available) coaches[ch].available = _chc[ch].available
-        if(_chc[ch].booked > coaches[ch].booked) coaches[ch].booked = _chc[ch].booked
-        if(_chc[ch].available < coaches[ch].available) coaches[ch].available = _chc[ch].available
-      }
+      coaches[type].booked += compartments[comp].stats.booked
+      coaches[type].available += compartments[comp].stats.available
     }
     console.log({ coaches })
     return coaches
@@ -162,3 +151,10 @@ export class SearchResultComponent implements OnInit {
     return ids
   }
 }
+
+        // sr.availability.stations[station.sId] = {}
+        //Availability across stations
+        // sr.availability.stations[station.sId].compartments =
+        //   this.summarizeCompartmentAvailability(station.compartments)
+      // })
+      //Availability by compartment type

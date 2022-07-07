@@ -1,1 +1,79 @@
-<p>booking works!</p>
+<div class="container">
+    <div class="card mt-2 mx-3">
+        <div class="card-header">Booking By Train</div>
+        <div class="card-body">
+           <div class="container">
+            <form class="form-inline" (ngSubmit)="onsubmit()">
+                <div class="form-group">
+                  <label class="sr-only" for="train">Train :</label>
+                  <ng-select [items]="trains"                
+                    bindLabel="trainName"
+                    dropdownPosition="auto"
+                    bindValue="train_Id"                  
+                    placeholder="Search Train"
+                    [virtualScroll]="true"
+                    name="train_Id"
+                    [(ngModel)]="SearchModel.train_Id"
+                    class="form-control"
+                    required
+                    ></ng-select>
+                    
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="date">Date:</label>
+                  <input type="date" class="form-control" id="date" name="date" [(ngModel)]="SearchModel.date" required>
+                </div>
+                <div class="form-group mt-2">
+                <button type="submit" class="btn btn-primary">Get All Booking</button>
+                </div>
+              </form>
+           </div>
+              
+        </div>
+      </div>
+</div>
+<div class="container mt-4">
+    <div class="row mt-2">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col">No Of Passengers</th>
+              <th scope="col">Fare</th>
+              <th scope="col">Class</th>  
+              <th scope="col">Coach</th>          
+              <th scope="col">Seat Nos</th>            
+              <th scope="col">Status</th>            
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of bookings">
+              <td>{{ item.fromStation }}</td>
+              <td>{{ item.toStation }}</td>
+              <td>{{ item.fare }}</td>
+              <td>{{ item.noOfPassengers }}</td>
+              <td>{{ item.coachType }}</td>
+              <td>{{ item.coachName }}</td>    
+             
+                
+              <td>
+                <ng-container *ngFor="let passenger of item.passengerDetails">
+                    {{ passenger.seatNo }}
+                </ng-container> 
+            </td>
+            
+            
+            <td>{{ item.isCancelled }}</td>
+            <td>
+                <a class="btn btn-sm btn-primary mx-1" (click)="passengers(item.passengerDetails)" >
+                  <i class="bi bi-people-fill"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<app-passenger-details [PassengersDetailsFromParent]="Passngrs" ></app-passenger-details>
+</div>

@@ -1,0 +1,48 @@
+
+<ng-template  #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left"> Passngers Details </h4>
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="close()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Age</th>
+                <th scope="col">Seat No</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of PassengersDetailsFromParent;let i=index">
+                  <td>{{i+1}}</td>
+                  <th >{{item.name}}</th>
+                  <th >{{item.gender}}</th>
+                  <th >{{item.age}}</th>
+                  <th >{{item.seatNo}}</th>
+              </tr>
+            
+            </tbody>
+          </table>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        id="close"
+        class="btn btn-secondary"
+        (click)="close()"
+      >
+        Close
+      </button>
+    </div>
+  </ng-template>

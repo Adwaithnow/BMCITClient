@@ -71,7 +71,7 @@ export class TestComponent implements OnInit {
   onSave() {
     console.log(this.form.getRawValue())
     this.result = this.form.getRawValue();
-    this.routeservice.AddRoute(this.form.getRawValue()).subscribe()
+    // this.routeservice.AddRoute(this.form.getRawValue()).subscribe()
   }
 
   addNewstation() {

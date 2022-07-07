@@ -11,9 +11,9 @@ export class HistoryComponent implements OnInit {
   constructor(private booking:BookingService) { }
 
   ngOnInit(): void {
-    this.GetAllUpcomingBookingByUserId(this.Id)
-    this.GetAllCompletedBookingByUserId(this.Id)
-    this.GetAllCancelledBookingByUserId(this.Id)
+    // this.GetAllUpcomingBookingByUserId(this.Id)
+    // this.GetAllCompletedBookingByUserId(this.Id)
+    // this.GetAllCancelledBookingByUserId(this.Id)
   }
   GetAllUpcomingBookingByUserId(Id:string){
     return this.booking.GetAllUpcomingBookingByUserId(Id).subscribe()
