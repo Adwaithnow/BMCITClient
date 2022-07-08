@@ -29,6 +29,8 @@ import { SearchstationComponent } from './components/Shared/searchstation/search
 import { WeekdayComponent } from './components/Shared/weekday/weekday.component';
 import { FeedbackComponent } from './components/Shared/feedback/feedback.component';
 import { PassengerDetailsComponent } from './components/Shared/passenger-details/passenger-details.component';
+import { LoginComponent } from './components/Shared/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,8 @@ import { PassengerDetailsComponent } from './components/Shared/passenger-details
     WeekdayComponent,
     FeedbackComponent,
     PassengerDetailsComponent,
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class SearchResultComponent implements OnInit {
     toStation:'',
     date:''
   }
+  SelectedTrain:any;
   selectedCompartmentType:string = ''
   searchresult:any[]=[]
   fakeArray = new Array(4);
@@ -25,8 +26,9 @@ export class SearchResultComponent implements OnInit {
   CompartmentsForView(item:any){
     return Object.keys(item.availability.compartmentTypes)
   }
-  book(comp:any){
-    console.log(comp);
+  book(comp:any,item:any[]){
+    this.SelectedTrain=item;
+    console.log(item);
     this.selectedCompartmentType = comp
     
     this.selectedcompartment=true
@@ -53,6 +55,7 @@ export class SearchResultComponent implements OnInit {
     this.searchresult.forEach(sr => {
       sr.availability = {}
       const stationIds=this.getStationIds(sr.stations)
+      sr.availability.stationIds = stationIds
       console.log({ stationIds })
       let compartmentsToCheck: any[] = []
       sr.chartStation.forEach((station:any) => {
@@ -70,6 +73,7 @@ export class SearchResultComponent implements OnInit {
       if(!availability[comp.name]) {
         availability[comp.name] = {
           type: comp.type,
+          name: comp.name,
           seats: comp.seats,
         }
       }

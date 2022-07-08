@@ -7,8 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./seat-arrange-ment.component.css']
 })
 export class SeatArrangeMentComponent implements OnInit {
-  @Input() SeatArrangemnt:string=''
-  @Input() SearchResults:any[]=[]
+  @Input() selectedcompartment:string=''
+  SelectedCoach:string
+  chkout:boolean=false;
+  @Input() SearchResults:any
   fakeArray = [
   [1,1,1,1],
   [1,1,1,1],
@@ -33,6 +35,24 @@ export class SeatArrangeMentComponent implements OnInit {
       this.Seat.splice(inde,1);
       console.log("Kalayanam");
     }  
+  }
+  gotochekout(){
+    console.log("Hai");
+    this.chkout=!this.chkout
+    
+  }
+  getSeatsOfSelectedCompartment() {
+    console.log(this.SearchResults.availability.compartments[this.SelectedCoach])
+    return this.SearchResults.availability.compartments[this.SelectedCoach]
+  }
+  getCompartmentsOfSelectedType() {
+    let comps: any[] = []
+    for(let [key, v] of Object.entries(this.SearchResults.availability.compartments)) {
+        if (this.SearchResults.availability.compartments[key].type == this.selectedcompartment) {
+          comps.push(v)
+        }
+    }
+    return comps
   }
   // findme(i:number,j:number){
   //   let indu:number=-1;

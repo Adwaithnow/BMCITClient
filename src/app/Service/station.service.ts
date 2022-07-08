@@ -23,5 +23,8 @@ export class StationService {
    GetAllStations():Observable<any[]>{
     return this.http.get<[]>(this.baseUrl + 'Station/GetAllStations')
   };
+  GetOneStationById():Observable<any[]>{
+    return this.http.get<[]>(this.baseUrl + 'Station/GetAllStations')
+  };
   
 }

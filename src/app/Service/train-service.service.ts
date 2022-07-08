@@ -13,6 +13,9 @@ export class TrainServiceService {
   GetAllTrains():Observable<any[]>{
     return this.http.get<[]>(this.baseUrl+'TrainUser/GetAllTrains')
   }
+  GetAllTRainWithoutRoute():Observable<any[]>{
+    return this.http.get<[]>(this.baseUrl+'Train/GetAllTrainsWithoutRoute')
+  }
   GetAllStations():Observable<any[]>{
     return this.http.get<[]>(this.baseUrl + 'Station/GetAllStations')
   };

@@ -21,7 +21,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{comp}}</h5>
                 <p class="card-text">AVAILABLE-{{item.availability.compartmentTypes[comp].available}}</p>
-                <a class="btn btn-primary" (click)="book(comp)">Buy Now</a>
+                <a class="btn btn-primary" (click)="book(comp,item)">Buy Now</a>
               </div>
             </div>
           </div>
@@ -31,6 +31,6 @@
   </div>
 </div>
 <div *ngIf="selectedcompartment" class="container">
-  <app-seat-arrange-ment [SeatArrangemnt]="selectedCompartmentType" [SearchResults]="searchresult">
+  <app-seat-arrange-ment [selectedcompartment]="selectedCompartmentType" [SearchResults]="SelectedTrain">
   </app-seat-arrange-ment>
 </div>

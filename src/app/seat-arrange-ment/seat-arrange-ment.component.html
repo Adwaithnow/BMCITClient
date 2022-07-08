@@ -1,42 +1,70 @@
-<div *ngFor="let item of fakeArray" class="train">
-    <!--   <div class="exit exit--front train-body"></div> -->
-      <div  class="exit front train-body">
-        <div>Toilet</div><div></div><div></div>
-      </div>
-      <ol class="wagon train-body">
-        <li *ngFor="let item of fakeArray;let i = index" class="row row">
-              <ol class="seats">
-                <li class="seat">
-                  <input type="checkbox" (click)="additem(i,0)" [disabled]="!item[0]" id='{{i+1}}A' />
-                  <label for='{{i+1}}A'>{{(i*4)+1}}</label>
-                </li>
-                
-                <li class="seat">
-                  <input type="checkbox" id='{{i+1}}B' (click)="additem(i,1)" [disabled]="!item[1]"  />
-                  <label for='{{i+1}}B' >{{(i*4)+2}}</label>
-                </li>
-                <li class="seat">
-                  <input type="checkbox" id='{{i+1}}C' (click)="additem(i,2)" [disabled]="!item[2]" />
-                  <label for='{{i+1}}C'>{{(i*4)+3}}</label>
-                </li>
-                <li class="seat">
-                  <input type="checkbox" id='{{i+1}}D' (click)="additem(i,3)" [disabled]="!item[3]"/>
-                  <label for='{{i+1}}D'>{{(i*4)+4}}</label>
-                </li>
-              </ol>
-            </li>
-       
-      </ol>
-      <div class="exit back train-body">
-        <div>Toilet</div><div></div><div></div>
-      </div>
-      
-      
-      
-    <!--   <div class="exit exit--back train-body"></div> -->
-    </div>
+<div *ngIf="!chkout" class="container">
+  <div class="form-group">
+    <label for="contactMethod">Contact method</label>
+    <select 
+        name="contactMethod" 
+        id="contactMethod" 
+        class="form-control"
+        [(ngModel)]="SelectedCoach">
+        <option *ngFor="let item of getCompartmentsOfSelectedType()" [value]="item.name">{{ item.name}}</option>
+    </select>
+</div>
 
-    <pre>
-        
+  <!-- <form >
+    <div class="form-group">
+    <label for="exampleSelect">Select Coach</label>
+    <select class="form-control" id="exampleSelect" [(ngModel)]="SelectedCoach">
+      <option *ngFor="let item of getCompartmentsOfSelectedType()">{{item.name}}</option>
+      
+    </select>
+</div>
+  </form> -->
+  <div  class="train">
+    <!--   <div class="exit exit--front train-body"></div> -->
+    <div class="exit front train-body">
+      <div>Toilet</div>
+      <div></div>
+      <div></div>
+    </div>
+    <ol class="wagon train-body">
+      <li *ngFor="let item of getSeatsOfSelectedCompartment()?.seats??[];let i = index" class="row row">
+        <ol class="seats">
+          <li class="seat">
+            <input type="checkbox" (click)="additem(i,0)" [disabled]="item[0]" id='{{i+1}}A' />
+            <label for='{{i+1}}A'>{{(i*4)+1}}</label>
+          </li>
+
+          <li class="seat">
+            <input type="checkbox" id='{{i+1}}B' (click)="additem(i,1)" [disabled]="item[1]" />
+            <label for='{{i+1}}B'>{{(i*4)+2}}</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id='{{i+1}}C' (click)="additem(i,2)" [disabled]="item[2]" />
+            <label for='{{i+1}}C'>{{(i*4)+3}}</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id='{{i+1}}D' (click)="additem(i,3)" [disabled]="item[3]" />
+            <label for='{{i+1}}D'>{{(i*4)+4}}</label>
+          </li>
+        </ol>
+      </li>
+    </ol>
+    <div class="exit back train-body">
+      <div>Toilet</div>
+      <div></div>
+      <div></div>
+    </div>
+    
+    <!-- <div class="exit exit--back train-body"></div> -->
+  </div>
+  <button (click)="gotochekout()">Go to chckout</button> 
+</div>
+<div class="container">
+  <app-checkout *ngIf="chkout" [Seats]="Seat" [SearchResultsChkout]="SearchResults"></app-checkout>
+
+</div>
+
+<pre>
+   
       {{ Seat | json }}
-  </pre >
+  </pre>
