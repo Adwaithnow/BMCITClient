@@ -1,31 +1,24 @@
-<ng-template #template>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Login</h4>
-        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="close()">
-            <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form #stationForm="ngForm" id="stationform" class="row g-3 needs-validation" (ngSubmit)="onstationsubmit()"
-            novalidate>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter email">
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body display:block ">
+                    <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)" >
+                        <img  class="mb-4 align-items-center" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                        <p class="mb-3 text-center font-weight-normal">Please sign in</p>
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  ngModel
+                        name="email" required="" autofocus="">
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ngModel
+                        name="password" required="">
+                        <div class="mt-2 mb-3">
+                        
+                          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                        </div>
+                      </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-
-        </form>
+        </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" id="close" class="btn btn-secondary" (click)="close()">
-            Close
-        </button>
-        <button type="submit" form="stationform" class="btn btn-primary">
-            Sign Up
-        </button>
-    </div>
-</ng-template>
+</div>

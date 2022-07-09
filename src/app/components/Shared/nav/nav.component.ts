@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/Service/user-auth.service';
+import { UserServiceService } from 'src/app/Service/user-service.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -7,13 +10,21 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  @ViewChild(LoginComponent) child!:any
-  constructor() { }
+  
+  constructor(
+    private userAuthService: UserAuthService,
+    private router: Router,
+    public userService: UserServiceService
+  ) { }
 
   ngOnInit(): void {
   }
-  
-  OpenModal(){
-    this.child.openModal();
+  public isLoggedIn() {
+    return this.userAuthService.isLoggedIn();
+  }
+
+  public logout() {
+    this.userAuthService.clear();
+    this.router.navigate(['']);
   }
 }

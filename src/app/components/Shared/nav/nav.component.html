@@ -25,23 +25,29 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['Admin']" routerLinkActive="active" >Admin</a>
+        <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
+          <a class="nav-link" routerLink="/Admin"
+           routerLinkActive="active" >Admin</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['User/Home']" routerLinkActive="active">User</a>
+        <li class="nav-item" *ngIf="userService.roleMatch(['User'])">
+          <a class="nav-link"  [routerLink]="['User/Home']" routerLinkActive="active">User</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" >Station Management</a>
         </li>
       </ul>
-      <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-secondary px-3 me-2" (click)="OpenModal()">Login</button>
-        <button type="button" class="btn btn-primary signup me-3">
+      <div class="d-flex align-items-center" *ngIf="!isLoggedIn()">
+
+        <button type="button" class="btn btn-secondary px-3 me-2" [routerLink]="['Auth/signin']">Login</button>
+        <button type="button" class="btn btn-primary signup me-3"  [routerLink]="['Auth/signin']">
           Sign up
         </button>
+      </div>
+      <div class="d-flex align-items-center" *ngIf="isLoggedIn()">
+
+        <button type="button" class="btn btn-secondary px-3 me-2" (click)="logout()">Sign Out</button>
+      
       </div>
     </div>
   </div>
 </nav>
-<app-login></app-login>

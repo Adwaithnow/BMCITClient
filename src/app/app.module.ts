@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/Shared/nav/nav.component';
 import { VhomeComponent } from './components/Shared/vhome/vhome.component';
-import{HttpClientModule} from '@angular/common/http'
+import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrainManagementComponent } from './components/Admin/train-management/train-management.component';
 import { AddTrainComponent } from './components/Admin/TrainManagement/add-train/add-train.component';
@@ -30,7 +30,13 @@ import { WeekdayComponent } from './components/Shared/weekday/weekday.component'
 import { FeedbackComponent } from './components/Shared/feedback/feedback.component';
 import { PassengerDetailsComponent } from './components/Shared/passenger-details/passenger-details.component';
 import { LoginComponent } from './components/Shared/login/login.component';
-
+import { AuthGuard } from './Auth/auth.guard';
+import { AuthInterceptor } from './Auth/auth.interceptor';
+import { UserServiceService } from './Service/user-service.service';
+import { JwtModule} from '@auth0/angular-jwt';
+export function tokenGetter() { 
+  return localStorage.getItem("jwtToken"); 
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +61,7 @@ import { LoginComponent } from './components/Shared/login/login.component';
     PassengerDetailsComponent,
     LoginComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -67,9 +74,24 @@ import { LoginComponent } from './components/Shared/login/login.component';
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
     NgSelectModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:5001"],
+        disallowedRoutes: []
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    },
+    UserServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
