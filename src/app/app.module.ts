@@ -34,6 +34,7 @@ import { AuthGuard } from './Auth/auth.guard';
 import { AuthInterceptor } from './Auth/auth.interceptor';
 import { UserServiceService } from './Service/user-service.service';
 import { JwtModule} from '@auth0/angular-jwt';
+import { ToastrModule } from 'ngx-toastr';
 export function tokenGetter() { 
   return localStorage.getItem("jwtToken"); 
 }
@@ -81,7 +82,11 @@ export function tokenGetter() {
         allowedDomains: ["localhost:5001"],
         disallowedRoutes: []
       }
+    }),
+    ToastrModule.forRoot({
+      positionClass:'toast-bottom-right'
     })
+   
   ],
   providers: [
     AuthGuard,

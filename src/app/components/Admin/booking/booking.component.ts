@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { BookingService } from 'src/app/Service/booking.service';
 import { TrainServiceService } from 'src/app/Service/train-service.service';
 import { PassengerDetailsComponent } from '../../Shared/passenger-details/passenger-details.component';
@@ -16,7 +17,11 @@ export class BookingComponent implements OnInit {
   Passngrs:any[];
   trains:any[]=[]
   // trains: any[] = [];
-  constructor(private booking: BookingService, private fb: FormBuilder,private train: TrainServiceService) { }
+  constructor(private booking: BookingService, 
+    private fb: FormBuilder,
+    private train: TrainServiceService,
+    private toastr:ToastrService
+    ) { }
   bookings: any[] = []
   ngOnInit(): void {
     this.train.GetAllTrains().subscribe({ next: (res: any) => this.trains = res })
@@ -24,7 +29,13 @@ export class BookingComponent implements OnInit {
   }
   onsubmit(){
     console.log(this.SearchModel);
-    this.booking.GetAllBookingForAdminByTrainId(this.SearchModel).subscribe(res=>this.bookings=res)
+    this.booking.GetAllBookingForAdminByTrainId(this.SearchModel).subscribe({next:(res:any)=>{this.bookings=res.rData},
+  error:(err:any)=>{
+    console.log(err.error.rData);
+    
+    this.toastr.error(err.error.rData)
+  }
+  })
   }
   passengers(pass:any){
     this.Passngrs=pass;
