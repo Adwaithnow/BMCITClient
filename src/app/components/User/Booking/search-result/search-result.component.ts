@@ -54,7 +54,10 @@ export class SearchResultComponent implements OnInit {
   reCountAvailability(): void {
     this.searchresult.forEach(sr => {
       sr.availability = {}
-      const stationIds=this.getStationIds(sr.stations)
+      sr.journeyStats = {}
+      const tmp = this.getStationIds(sr.stations)
+      const stationIds = tmp.ids
+      sr.journeyStats.travelDistance = tmp.dist
       sr.availability.stationIds = stationIds
       console.log({ stationIds })
       let compartmentsToCheck: any[] = []
@@ -147,12 +150,14 @@ export class SearchResultComponent implements OnInit {
     let ids:string[] = []
     const _fstn = stations.find((s:any) => s.stationId == this.Model.FromStation)
     const _tstn = stations.find((s:any) => s.stationId == this.Model.ToStation)
+    const dist = _tstn.distance - _fstn.distance
     stations.forEach((s:any) => {
-      if(_fstn.distance >= s.distance || _tstn.distance <= s.distance) {
+      if(_fstn.distance <= s.distance && _tstn.distance >= s.distance) {
+        console.log({ _fstn, _tstn, s })
         ids.push(s.stationId)
       }
     })
-    return ids
+    return {ids, dist}
   }
 }
 

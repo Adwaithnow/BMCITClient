@@ -60,7 +60,7 @@
   <button (click)="gotochekout()">Go to chckout</button> 
 </div>
 <div class="container">
-  <app-checkout *ngIf="chkout" [Seats]="Seat" [SearchResultsChkout]="SearchResults"></app-checkout>
+  <app-checkout *ngIf="chkout" [Seats]="Seat" [SelectedCompart]="selectedcompartment" [coachName]="SelectedCoach" [SearchResultsChkout]="SearchResults"></app-checkout>
 
 </div>
 

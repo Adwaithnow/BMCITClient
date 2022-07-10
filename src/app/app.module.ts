@@ -35,6 +35,7 @@ import { AuthInterceptor } from './Auth/auth.interceptor';
 import { UserServiceService } from './Service/user-service.service';
 import { JwtModule} from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
+import { CrudTrainComponent } from './components/Admin/crud-train/crud-train.component';
 export function tokenGetter() { 
   return localStorage.getItem("jwtToken"); 
 }
@@ -61,8 +62,7 @@ export function tokenGetter() {
     FeedbackComponent,
     PassengerDetailsComponent,
     LoginComponent,
-
-
+    CrudTrainComponent,
   ],
   imports: [
     BrowserModule,

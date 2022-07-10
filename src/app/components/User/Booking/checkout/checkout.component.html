@@ -6,26 +6,23 @@
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">Test Express</h6>
-                        <small class="text-muted">Train No : 16659</small>
+                        <h6 class="my-0">{{this.SearchResultsChkout.trainName}}</h6>
+                        <small class="text-muted">Train No : {{this.SearchResultsChkout.trainNo}}</small>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">No of Passengers</h6>
-                        <span class="badge  bg-primary rounded-pill">9</span>
-                        <small class="text-muted  m-2">Adult</small>
-                        <span class="badge bg-primary rounded-pill ">3</span>
-                        <small class="text-muted"> Child</small>
+                    
                     </div>
-                    <span class="text-muted">10</span>
+                    <span class="text-muted">{{this.Seats.length}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Fare</h6>
-                        <small class="text-muted">24 X 10</small>
+                        <small class="text-muted">{{this.faredetails.cost}} X {{this.Seats.length}}</small>
                     </div>
-                    <span class="text-muted">₹245</span>
+                    <span class="text-muted">₹{{totalfare}}</span>
                 </li>
                 <!-- <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success">
@@ -36,17 +33,17 @@
         </li> -->
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (INR)</span>
-                    <strong>₹245</strong>
+                    <strong>₹{{totalfare}}</strong>
                 </li>
 
             </ul>
-            <form class="card">
+            <div class="card">
                 <div class="input-group">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">
+                    <button class="w-100 btn btn-primary btn-lg"  (click)="onsave()">
                         Continue to checkout
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="col-md-7 col-lg-8">
 
@@ -73,7 +70,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ng-container formArrayName="PassengersDetails"
+                                    <ng-container formArrayName="passengerDetails"
                                         *ngFor="let o of Passenger.controls; let i = index">
                                         <tr class="table-primary" [formGroupName]="i">
 
@@ -95,13 +92,13 @@
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" formControlName="age"
+                                                    <input type="number" class="form-control" formControlName="age"
                                                         placeholder="Enter Age">
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" formControlName="seatNo"
+                                                    <input type="number" class="form-control" formControlName="seatNo"
                                                         placeholder="Enter Age" readonly> 
                                                 </div>
                                             </td>
@@ -130,6 +127,8 @@
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
                         <div class="accordion-body">
+                            <a>{{SearchResultsChkout.fromStationAng}}</a>
+                            <a>{{SearchResultsChkout.toStationAng}}</a>
                             {{SearchResultsChkout|json}}
                         </div>
                     </div>

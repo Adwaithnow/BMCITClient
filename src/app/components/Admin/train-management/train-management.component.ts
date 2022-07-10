@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild  } from '@angular/core';
 import { Station } from 'src/app/Models/Station';
+import { TrainRes } from 'src/app/Models/trainres';
 import { StationService } from 'src/app/Service/station.service';
 import { TrainServiceService } from '../../../Service/train-service.service';
+
+
 import { AddstationComponent } from '../StationManagement/addstation/addstation.component';
 
 @Component({
@@ -12,12 +15,22 @@ import { AddstationComponent } from '../StationManagement/addstation/addstation.
 export class TrainManagementComponent implements OnInit {
   trains: any[] = [];
   @ViewChild(AddstationComponent) child!:any
+
+
   isUpdateStation:boolean=false;
   UpdateStationDta:Station={
     sId: "",
     stationName: "",
     stationShortCode: "",
     stationLocation: []
+  }
+  UpdateTrainDta:TrainRes={
+    train_Id: "",
+    trainNo: 0,
+    trainName: "",
+    fromStation: "",
+    toStation: "",
+    daysRun:[]
   }
   id: string = '';
   updatetoggle: boolean = false;
@@ -65,7 +78,7 @@ export class TrainManagementComponent implements OnInit {
     // window.location.reload();
   }
   gobackfromypdate(event: boolean) {
-    this.updatetoggle = event;
+    // this.updatetoggle = event;
   }
   test() {
     console.log("hai")
@@ -79,6 +92,16 @@ export class TrainManagementComponent implements OnInit {
    this.child.openModal();
    console.log()
   }
+  // UpdateTrain(item:string){
+  //   console.log(item);
+  //   this.id=item;
+  //   // this.UpdateTrainDta=item;
+  //   this.updatetoggle = !this.updatetoggle;
+  //   // this.trainchild.isUpdateTrain=!this.trainchild.isUpdateTrain;
+  //   this.trainchild.loadTrain()
+  //   // this.trainchild.openModal();
+  //   // console.log()
+  //  }
   DeleteStation(id:string){
     this.stationservice.DeleteOneStation(id).subscribe()
     window.location.reload()

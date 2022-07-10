@@ -1,0 +1,58 @@
+<button type="button" class="btn btn-primary" (click)="openModal()">
+    Add Station <i class="bi bi-plus-circle"></i>
+  </button>
+<ng-template #templates>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left"> {{ isUpdateTrain ? "Update Train" : "Add Train" }}</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="close()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #stationForm="ngForm" id="stationform" class="row g-3 needs-validation" (ngSubmit)="onstationsubmit()"
+            novalidate>
+            <div class="col-md-6">
+                <label for="fromStation" class="form-label">Train No</label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" aria-describedby="inputGroupPrepend" name="stationName"
+                        [(ngModel)]="model.trainNo" required />
+                    <div class="invalid-feedback">Please Select station</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="toStation" class="form-label">Train Name</label>
+                <input type="text" class="form-control" id="toStation" name="ToStation" [(ngModel)]="model.trainName"
+                    required />
+                <div class="invalid-feedback">Please provide a valid city.</div>
+            </div>
+            <div class="col-md-6">
+                <label for="toStation" class="form-label">From Station</label>
+                <ng-select [items]="allstations" bindLabel="stationName" dropdownPosition="auto" bindValue="sId"
+                    name="fromStation"
+                    placeholder="Search Station" [virtualScroll]="true" class="form-control" [virtualScroll]="true"
+                    [(ngModel)]="model.fromStation">
+                </ng-select>
+            </div>
+
+            <div class="invalid-feedback">Please provide a valid city.</div>
+
+            <div class="col-md-6">
+                <label for="toStation" class="form-label">To Station</label>
+                <ng-select [items]="allstations" bindLabel="stationName" dropdownPosition="auto" bindValue="sId"
+                name="toStation"
+                    placeholder="Search Station" [virtualScroll]="true" class="form-control" [virtualScroll]="true"
+                    [(ngModel)]="model.toStation">
+                </ng-select>
+                <div class="invalid-feedback">Please provide a valid city.</div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="close" class="btn btn-secondary" (click)="close()">
+            Close
+        </button>
+        <button type="submit" form="stationform" class="btn btn-primary">
+            {{ isUpdateTrain ? "Update" : "Add" }}
+        </button>
+    </div>
+</ng-template>

@@ -1,14 +1,12 @@
 <form #myForm="ngForm" id="myform" class="row g-3 needs-validation" (ngSubmit)="onsubmit()" novalidate>
   <div class="col-md-6">
-    <ng-select [multiple]="true" [(ngModel)]="model.daysRun">
-      <ng-option *ngFor="let days of daysrun" [value]="days.id" >{{days.name}}</ng-option>
-    </ng-select>
+   
     <label for="trainNo" class="form-label">Train No</label>
     <input type="number" class="form-control" id="trainNo" name="trainNo" [(ngModel)]="model.trainNo" required />
     <div class="valid-feedback">Looks good!</div>
   </div>
   <div class="col-md-6">
-    <label for="trainName" class="form-label">{{ model.trainName }}</label>
+    <label for="trainName" class="form-label">Train name</label>
     <input type="text" class="form-control" id="trainName" name="trainName" [(ngModel)]="model.trainName" required />
     <div class="valid-feedback">Looks good!</div>
   </div>
@@ -16,18 +14,11 @@
     <label for="fromStation" class="form-label">Starting Station</label>
     <div class="input-group has-validation">
       <div class="ng-autocomplete">
-        <ng-autocomplete [data]="allstations" [searchKeyword]="keyword" placeholder="Choose Station"
-          (selected)="SelectStart($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-          [(ngModel)]="Model.ToStation">
-        </ng-autocomplete>
-
-        <ng-template #itemTemplate let-item>
-          <a [innerHTML]="item.stationName"></a>
-        </ng-template>
-
-        <ng-template #notFoundTemplate let-notFound>
-          <div [innerHTML]="notFound"></div>
-        </ng-template>
+        <ng-select [items]="allstations" bindLabel="stationName" dropdownPosition="auto" bindValue="sId"
+          name="fromStation"
+          placeholder="Search Station" [virtualScroll]="true" class="form-control" [virtualScroll]="true"
+          [(ngModel)]="model.fromStation">
+        </ng-select>
       </div>
       <div class="invalid-feedback">Please Select station</div>
     </div>
@@ -36,18 +27,11 @@
     <label for="toStation" class="form-label">Destination Station</label>
 
     <div class="ng-autocomplete">
-      <ng-autocomplete [data]="allstations" [searchKeyword]="keyword" placeholder="Choose Station"
-        (selected)="SelectDestination($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-        [(ngModel)]="Model.ToStation">
-      </ng-autocomplete>
-
-      <ng-template #itemTemplate let-item>
-        <a [innerHTML]="item.stationName"></a>
-      </ng-template>
-
-      <ng-template #notFoundTemplate let-notFound>
-        <div [innerHTML]="notFound"></div>
-      </ng-template>
+      <ng-select [items]="allstations" bindLabel="stationName" dropdownPosition="auto" bindValue="sId"
+      name="toStation"
+        placeholder="Search Station" [virtualScroll]="true" class="form-control" [virtualScroll]="true"
+        [(ngModel)]="model.toStation">
+      </ng-select>
     </div>
     <div class="invalid-feedback">Please provide a valid city.</div>
   </div>
@@ -57,12 +41,15 @@
     <br />
 
     <div class="invalid-feedback">Please select days run.</div>
-    <div class="form-check form-check-inline">
+    <ng-select [multiple]="true" [(ngModel)]="model.daysRun" name="model.daysRun">
+      <ng-option *ngFor="let days of daysrun" [value]="days.id">{{days.name}}</ng-option>
+    </ng-select>
+    <!-- <div class="form-check form-check-inline">
       <label class="form-check-label">
         <input name="DaysRun" (click)="additem(0)" type="checkbox" class="form-check-input" />Sun
       </label>
-    </div>
-    <div class="form-check form-check-inline">
+    </div> -->
+    <!-- <div class="form-check form-check-inline">
       <label class="form-check-label">
         <input name="DaysRun" (click)="additem(1)" type="checkbox" class="form-check-input" />Mon
       </label>
@@ -91,11 +78,11 @@
       <label class="form-check-label">
         <input type="checkbox" (click)="additem(6)" class="form-check-input" />Sat
       </label>
-    </div>
-    
+    </div> -->
   </div>
   <div class="col-12">
-    <button type="submit" class="btn btn-primary"> submit</button>
+    <button type="submit" class="btn btn-primary">submit</button>
+    <button class="btn btn-primary" (click)="goback()">Goback</button>
 
   </div>
 </form>
