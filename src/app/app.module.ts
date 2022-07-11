@@ -36,6 +36,12 @@ import { UserServiceService } from './Service/user-service.service';
 import { JwtModule} from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { CrudTrainComponent } from './components/Admin/crud-train/crud-train.component';
+import { SafePipePipe } from './pipe/safe-pipe.pipe';
+import { SignupComponent } from './components/Shared/signup/signup.component';
+import { ShomeComponent } from './components/Admin/StationManagement/shome/shome.component';
+import { ChartComponent } from './components/Admin/chart/chart.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CharthomeComponent } from './components/Admin/charthome/charthome.component';
 export function tokenGetter() { 
   return localStorage.getItem("jwtToken"); 
 }
@@ -63,6 +69,11 @@ export function tokenGetter() {
     PassengerDetailsComponent,
     LoginComponent,
     CrudTrainComponent,
+    SafePipePipe,
+    SignupComponent,
+    ShomeComponent,
+    ChartComponent,
+    CharthomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +96,8 @@ export function tokenGetter() {
     }),
     ToastrModule.forRoot({
       positionClass:'toast-bottom-right'
-    })
+    }),
+    BsDatepickerModule.forRoot(),
    
   ],
   providers: [

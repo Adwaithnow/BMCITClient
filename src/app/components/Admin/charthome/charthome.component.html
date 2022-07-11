@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <div class="row mt-2">
+        <h3>Charted Trains</h3>
+        <div class="row my-2">
+            <div class="col">
+                <button class="btn btn-primary" routerLink="/Admin/Chart/Add"> Chart Train</button>
+            </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col"> Train Name</th>
+              <th scope="col">Train No</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let item of charts">
+              <td>{{ item. trainName }}</td>
+              <td>{{ item.trainNo }}</td>
+              <td>{{ item.date }}</td>  
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>

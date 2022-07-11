@@ -1,46 +1,46 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { TrainServiceService } from '../../../Service/train-service.service';
 import { UserServiceService } from '../../../Service/user-service.service';
-
 @Component({
   selector: 'app-vhome',
   templateUrl: './vhome.component.html',
   styleUrls: ['./vhome.component.css']
 })
 export class VhomeComponent implements OnInit {
-  allstations:any[]=[];
-  Search:any[]=[];
-  Model:any={};
-  keyword = 'stationName';
-  constructor(private user:UserServiceService,private train:TrainServiceService) { }
-  users:any;
-  searchresult:boolean=false;
+  form: FormGroup;
+  allstations: any[] = [];
+  Search: any[] = [];
+  Model: any = {};
+  constructor(private user: UserServiceService,
+    private train: TrainServiceService,
+    private fb: FormBuilder,
+    private toastr: ToastrService
+  ) { }
+  users: any;
+  today:any=new Date();
+  searchresult: boolean = false;
   ngOnInit(): void {
+    this.creatForm()
     this.GetAllStation();
   }
-  GetAllStation(){
-    this.train.GetAllStations().subscribe(res=>this.allstations=res)
+  GetAllStation() {
+    this.train.GetAllStations().subscribe(res => this.allstations = res)
   }
-  SearchTrain(){
-    this.searchresult=!this.searchresult;
-    // this.user.SearchStation(this.Model).subscribe({next:res=>this.Search=res,error:er=>console.log(er)});
-    // console.log(this.Search)
+  SearchTrain() {
+    this.Model = this.form.getRawValue()
+    this.searchresult = !this.searchresult;
   }
-  selectEvent(item:any) {
-    this.Model.FromStation=item.sId;
+  creatForm() {
+    this.form = this.fb.group(
+      {
+        ToStation: [, Validators.required],
+        date: [, Validators.required],
+        FromStation: [, Validators.required]
+      }
+    );
+    this.form.get("date")!.setValue(formatDate(this.today,'yyyy-MM-dd','en'))
   }
-  SelectDestination(item:any) {
-    this.Model.ToStation=item.sId;
-  }
-
-  onChangeSearch(val: string) {
- 
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
-  
-  onFocused(e:any){
-    // do something when input is focused
-  }
-
 }

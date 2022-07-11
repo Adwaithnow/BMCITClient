@@ -1,0 +1,75 @@
+<div class="container">
+  <div
+    class="row justify-content-center align-items-center"
+    style="height: 100vh"
+  >
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body display:block">
+          <form
+            class="form-signin"
+            #loginForm="ngForm"
+            (ngSubmit)="signup(loginForm)"
+          >
+            <img
+              class="mb-4 align-items-center"
+              src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+              alt=""
+              width="72"
+              height="72"
+            />
+            <p class="mb-3 text-center font-weight-normal">Signup</p>
+            <label for="FirstName" class="sr-only">FirstName</label>
+            <input
+              type="text"
+              id="FirstName"
+              class="form-control"
+              placeholder="FirstName"
+              ngModel
+              name="firstName"
+              required=""
+              autofocus=""
+            />
+            <label for="FirstName" class="sr-only">Last Name</label>
+            <input
+              type="text"
+              id="LastName"
+              class="form-control"
+              placeholder="LastName"
+              ngModel
+              name="lastName"
+              required=""
+              autofocus=""
+            />
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input
+              type="email"
+              id="inputEmail"
+              class="form-control"
+              placeholder="Username"
+              ngModel
+              name="email"
+              required=""
+              autofocus=""
+            />
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input
+              type="password"
+              id="inputPassword"
+              class="form-control"
+              placeholder="Password"
+              ngModel
+              name="password"
+              required=""
+            />
+            <div class="mt-2 mb-3">
+              <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Sign in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

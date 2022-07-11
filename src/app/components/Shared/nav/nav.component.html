@@ -27,19 +27,34 @@
         </li>
         <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
           <a class="nav-link" routerLink="/Admin"
-           routerLinkActive="active" >Admin</a>
+           routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Admin</a>
+        </li>
+        <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
+          <a class="nav-link" routerLink="/Admin/Station" 
+           routerLinkActive="active" >Station</a>
+        </li>
+        <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
+          <a class="nav-link" routerLink="/Admin/Booking" 
+           routerLinkActive="active" >Bookings</a>
+        </li>
+        <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
+          <a class="nav-link" routerLink="/Admin/Chart" 
+           routerLinkActive="active" >Chart</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link"[routerLink]="['SearchStation']" routerLinkActive="active" >Search Station</a>
         </li>
         <li class="nav-item" *ngIf="userService.roleMatch(['User'])">
           <a class="nav-link"  [routerLink]="['User/Home']" routerLinkActive="active">User</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" >Station Management</a>
+        <li class="nav-item" *ngIf="userService.roleMatch(['User'])">
+          <a class="nav-link"[routerLink]="['User/bookings']" routerLinkActive="active" >Booking</a>
         </li>
       </ul>
       <div class="d-flex align-items-center" *ngIf="!isLoggedIn()">
 
-        <button type="button" class="btn btn-secondary px-3 me-2" [routerLink]="['Auth/signin']">Login</button>
-        <button type="button" class="btn btn-primary signup me-3"  [routerLink]="['Auth/signin']">
+        <button type="button" class="btn btn-secondary px-3 me-2" [routerLink]="['Login']">Login</button>
+        <button type="button" class="btn btn-primary signup me-3"  [routerLink]="['Signup']">
           Sign up
         </button>
       </div>

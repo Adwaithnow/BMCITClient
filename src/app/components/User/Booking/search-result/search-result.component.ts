@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/Service/user-service.service';
 import { weekDay } from "src/app/utils/appUtils";
 
@@ -21,9 +22,13 @@ export class SearchResultComponent implements OnInit {
   selectedCompartmentType:string = ''
   searchresult:any[]=[]
   fakeArray = new Array(4);
-  constructor(private user:UserServiceService) { }
+  constructor(private user:UserServiceService,
+    private router: Router
+    ) { }
   weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
   CompartmentsForView(item:any){
+    // console.log('itemm', item)
+    // console.log('itemm', item.availability.compartmentTypes)
     return Object.keys(item.availability.compartmentTypes)
   }
   book(comp:any,item:any[]){
@@ -44,10 +49,24 @@ export class SearchResultComponent implements OnInit {
         [5, "M"],
         [6, "M"],
     ]);
-    this.user.SearchStation(this.Model).subscribe(res=>{
-      this.searchresult = res;
-      this.reCountAvailability();
-      console.log('n', this.searchresult);
+    this.user.SearchStation(this.Model).subscribe({
+      next:(res:any)=>{
+        this.searchresult = res.rData;
+        console.log(this.searchresult );
+        
+        this.reCountAvailability();
+        console.log('n', this.searchresult);
+      },
+      error:(err:any)=>{
+        console.log("opk");
+        
+        setTimeout(() => {
+          this.router.navigate(['/home'])
+        }
+        , 10000);
+        window.location.reload();
+      // this.router.navigateByUrl("/home")      
+    }
     })
   }
 
@@ -150,6 +169,7 @@ export class SearchResultComponent implements OnInit {
     let ids:string[] = []
     const _fstn = stations.find((s:any) => s.stationId == this.Model.FromStation)
     const _tstn = stations.find((s:any) => s.stationId == this.Model.ToStation)
+    console.log("fromto",_fstn,_tstn)
     const dist = _tstn.distance - _fstn.distance
     stations.forEach((s:any) => {
       if(_fstn.distance <= s.distance && _tstn.distance >= s.distance) {

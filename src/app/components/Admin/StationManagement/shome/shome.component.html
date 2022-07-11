@@ -1,0 +1,33 @@
+<div class="container t-2">
+    <div class="row my-2">
+      <div class="col">
+        <!-- Button trigger modal -->
+        <app-addstation  [model]="UpdateStationDta" ></app-addstation>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Station Name</th>
+          <th scope="col">Code</th>
+          <th scope="col">Location</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of stations">
+          <td>{{ item.stationName }}</td>
+          <td>{{ item.stationShortCode }}</td>
+          <td>{{ item.stationLocation }}</td>
+          <td>
+            <a class="btn btn-sm btn-primary mx-1" (click)="UpdateStation(item)">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <a class="btn btn-sm btn-danger" (click)="DeleteStation(item.sId)">
+              <i class="bi bi-trash-fill"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

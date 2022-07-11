@@ -18,6 +18,11 @@ export class UserServiceService {
       headers: this.requestHeader,
     });
   }
+  public signup(loginData: any) {
+    return this.http.post(this.baseUrl + 'Accounts/Signup', loginData, {
+      headers: this.requestHeader,
+    });
+  }
   public roleMatch(allowedRoles: Array<string>): boolean {
     let isMatch: boolean = false;
     const userRoles: any = this.userAuthService.getRoles();

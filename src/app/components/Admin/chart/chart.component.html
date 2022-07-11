@@ -1,0 +1,37 @@
+<div class="container mt-4" >
+    <form [formGroup]="form" autocomplete="off">
+        <div class="form-group">
+          <label>Select Train</label>
+          <ng-select [items]="Trains"                
+            bindLabel="trainName"
+            dropdownPosition="auto"
+            bindValue="train_Id"                  
+            placeholder="Search Train"
+            [virtualScroll]="true"
+            formControlName="train_Id"
+            class="form-control"
+            [ngClass]="{ 'is-invalid':!train_id?.invalid && (form.get('train_id')?.dirty || form.get('train_id')?.touched)}" 
+            >
+        </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input
+        class="form-control"
+        #datepickerYMD="bsDatepicker"
+        bsDatepicker
+        [minDate]="today"
+        formControlName="date"
+        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',isAnimated: true }">
+             
+          <!-- <input type="date" class="form-control" id="date" placeholder="date"  formControlName="date"> -->
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+              <button class="btn btn-primary" [disabled]="form.invalid" (click)="submit()">Chart</button>
+          </div>
+        </div>
+    </form>
+
+</div>
+

@@ -3,7 +3,7 @@
         <div class="card-header">Booking By Train</div>
         <div class="card-body">
            <div class="container">
-            <form class="form-inline" (ngSubmit)="onsubmit()">
+            <form [formGroup]="form" class="form-inline">
                 <div class="form-group">
                   <label class="sr-only" for="train">Train :</label>
                   <ng-select [items]="trains"                
@@ -13,7 +13,7 @@
                     placeholder="Search Train"
                     [virtualScroll]="true"
                     name="train_Id"
-                    [(ngModel)]="SearchModel.train_Id"
+                    formControlName="train_Id"
                     class="form-control"
                     required
                     ></ng-select>
@@ -21,10 +21,16 @@
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="date">Date:</label>
-                  <input type="date" class="form-control" id="date" name="date" [(ngModel)]="SearchModel.date" required>
+                  <input
+                  class="form-control"
+                  #datepickerYMD="bsDatepicker"
+                  bsDatepicker
+              
+                  formControlName="date"
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',isAnimated: true }">
                 </div>
                 <div class="form-group mt-2">
-                <button type="submit" class="btn btn-primary">Get All Booking</button>
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onsubmit()">Get All Booking</button>
                 </div>
               </form>
            </div>
@@ -50,8 +56,8 @@
           </thead>
           <tbody >
             <tr *ngFor="let item of bookings">
-              <td>{{ item.fromStation }}</td>
-              <td>{{ item.toStation }}</td>
+              <td>{{ item.fromStationName }}</td>
+              <td>{{ item.toStationName }}</td>
               <td>{{ item.fare }}</td>
               <td>{{ item.noOfPassengers }}</td>
               <td>{{ item.coachType }}</td>
@@ -64,8 +70,8 @@
                 </ng-container> 
             </td>
             
-            
-            <td>{{ item.isCancelled }}</td>
+            <td *ngIf="item.isCancelled">Cancelled</td>
+            <td *ngIf="!item.isCancelled">Active</td>
             <td>
                 <a class="btn btn-sm btn-primary mx-1" (click)="passengers(item.passengerDetails)" >
                   <i class="bi bi-people-fill"></i>

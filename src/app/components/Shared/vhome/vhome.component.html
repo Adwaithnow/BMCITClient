@@ -1,44 +1,6 @@
-<!-- 
-<div class="first">
-    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-lg-5 py-5  ">
-          <div class="col-lg-7 text-center text-lg-start text-white bg-dark py-4">
-            <h1 class="display-4 fw-bold lh-1 mb-3  text-white">BMCIT</h1>
-            <p class="col-lg-10 fs-4">Book My Chair In Train is the expansion of BMCIT.The project using Angular and Asp.net Core WebApi to make all the transaction</p>
-          </div>
-          <div class="col-md-10 mx-auto col-lg-5">
-            <form #SearchForm class="row g-4 bg-light border rounded-3 p-4" (ngSubmit)="SearchTrain()" >
-                <div class="col-md-6">
-                  <label for="" class="form-label">From</label>
-                  <select class="form-select" name="FromStation" [(ngModel)]="Model.FromStation" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option *ngFor="let item of allstations"  [value]="item.sId">{{item.stationName}}</option>
-                  </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="validationDefault04" class="form-label">Destination</label>
-                    <select class="form-select" name="ToStation" [(ngModel)]="Model.ToStation" required>
-                      <option selected disabled value="">Choose...</option>
-                      <option *ngFor="let item of allstations"  [value]="item.sId">{{item.stationName}}</option>
 
-                      
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="" class="form-label">Date</label>
-                    <input type="date" class="form-control" name="date" [(ngModel)]="Model.date" required>
-                      
-                </div>
-                <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-              </form>
-          </div>
-        </div>
-      </div>
-</div> -->
 
-<div *ngIf="!searchresult" class="first">
+<!-- <div *ngIf="!searchresult" class="first">
   <div class="container col-xl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-center g-lg-5 py-5  ">
         <div class="col-lg-7 text-center text-lg-start text-white bg-dark py-4">
@@ -110,24 +72,105 @@
 </div>
 <div *ngIf="searchresult" class="container mt-3">
 <app-search-result [Model]="Model"></app-search-result>
+</div> -->
+<div *ngIf="!searchresult" class="first">
+  <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+      <div class="row align-items-center g-lg-5 py-5  ">
+        <div class="col-lg-7 text-center text-lg-start text-white bg-dark py-4">
+          <h1 class="display-4 fw-bold lh-1 mb-3  text-white">BMCIT</h1>
+          <p class="col-lg-10 fs-4">Book My Chair In Train is the expansion of BMCIT.The project using Angular and Asp.net Core WebApi to make all the transaction</p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-5">
+          <form  class="row g-4 bg-light border rounded-3 p-4" [formGroup]="form" >
+              <div class="col-md-6">
+                <label for="" class="form-label">From</label>
+                <ng-select [items]="allstations"                
+                bindLabel="stationName"
+                dropdownPosition="auto"
+                bindValue="sId"                  
+                placeholder="Search Station"
+                [virtualScroll]="true"
+                name="stationName"
+                formControlName="FromStation"
+                class="form-control"
+                required
+                ></ng-select>
+                <!-- <div class="ng-autocomplete">
+                  <ng-autocomplete 
+                    [data]="allstations"
+                    [searchKeyword]="keyword"
+                    placeholder="Choose Station"
+                    (selected)='selectEvent($event)'
+                    (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)'
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"
+                    >                                 
+                  </ng-autocomplete>
+                  
+                  <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.stationName"></a>
+                  </ng-template>
+                  
+                  <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                  </div> -->
+              </div>
+              <div class="col-md-6">
+                  <label for="validationDefault04" class="form-label">Destination</label>
+                  <ng-select [items]="allstations"                
+                bindLabel="stationName"
+                dropdownPosition="auto"
+                bindValue="sId"                  
+                placeholder="Search Station"
+                [virtualScroll]="true"
+                name="stationName"
+                formControlName="ToStation"
+                class="form-control"
+                required
+                ></ng-select>
+                  <!-- <div class="ng-autocomplete">
+                    <ng-autocomplete 
+                      [data]="allstations"
+                      [searchKeyword]="keyword"
+                      placeholder="Choose Station"
+                      (selected)='SelectDestination($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplate"
+                      [notFoundTemplate]="notFoundTemplate">  
+                      [(ngModel)]="Model.ToStation">                          
+                    </ng-autocomplete>
+                    
+                    <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.stationName"></a>
+                    </ng-template>
+                    
+                    <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                    </div> -->
+              </div>
+              <div class="col">
+                  <label for="" class="form-label">Date</label>
+                  <input
+                  class="form-control"
+                  #datepickerYMD="bsDatepicker"
+                  bsDatepicker
+                 
+                  formControlName="date"
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',isAnimated: true }">
+                    
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary"(click)="SearchTrain()" [disabled]="form.invalid">Search</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
 </div>
-<!-- <div class="ng-autocomplete">
-  <ng-autocomplete 
-    [data]="allstations"
-    [searchKeyword]="keyword"
-    placeholder="Choose Station"
-    (selected)='selectEvent($event)'
-    (inputChanged)='onChangeSearch($event)'
-    (inputFocused)='onFocused($event)'
-    [itemTemplate]="itemTemplate"
-    [notFoundTemplate]="notFoundTemplate">                                 
-  </ng-autocomplete>
-  
-  <ng-template #itemTemplate let-item>
-  <a [innerHTML]="item.stationName"></a>
-  </ng-template>
-  
-  <ng-template #notFoundTemplate let-notFound>
-  <div [innerHTML]="notFound"></div>
-  </ng-template>
-  </div> -->
+<div *ngIf="searchresult" class="container mt-3">
+<app-search-result [Model]="Model"></app-search-result>
+</div>
