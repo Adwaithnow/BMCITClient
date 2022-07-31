@@ -42,6 +42,7 @@ import { ShomeComponent } from './components/Admin/StationManagement/shome/shome
 import { ChartComponent } from './components/Admin/chart/chart.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CharthomeComponent } from './components/Admin/charthome/charthome.component';
+import { RoutehomeComponent } from './components/Admin/routehome/routehome.component';
 export function tokenGetter() { 
   return localStorage.getItem("jwtToken"); 
 }
@@ -74,6 +75,8 @@ export function tokenGetter() {
     ShomeComponent,
     ChartComponent,
     CharthomeComponent,
+    RoutehomeComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

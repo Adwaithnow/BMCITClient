@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild  } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Station } from 'src/app/Models/Station';
 import { TrainRes } from 'src/app/Models/trainres';
 import { StationService } from 'src/app/Service/station.service';
@@ -36,7 +37,8 @@ export class TrainManagementComponent implements OnInit {
   updatetoggle: boolean = false;
   stations: any[] = [];
   routes: any[] = [];
-  constructor(private train: TrainServiceService,private stationservice:StationService) { }
+  constructor(private train: TrainServiceService,private stationservice:StationService,
+    private toastr:ToastrService) { }
   displayedit: boolean = false;
  
   ngOnInit(): void {
@@ -67,7 +69,11 @@ export class TrainManagementComponent implements OnInit {
     window.location.reload();
   }
   deleteone(id: string) {
-    this.train.deleteoneuser(id).subscribe();
+    this.train.deleteoneuser(id).subscribe({
+      next:(data:any)=>{
+        this.toastr.success("Deleted Train")
+      }
+    });
     window.location.reload();
   }
   Update(Id: string) {

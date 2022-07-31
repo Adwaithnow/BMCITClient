@@ -11,6 +11,17 @@
             <app-weekday *ngFor="let day of weekDays; let i = index" [day]="day" [highlight]="item.daysRun.includes(i)">
             </app-weekday>
           </div>
+          <div class="row">
+            <div class="col">
+              Time of Arrival {{item.fromStationDetails.timeArrival}}
+            </div>
+            <div class="col">
+              Time of Departure {{item.fromStationDetails.timeDeparture}}
+            </div>
+            <div class="col">
+              platform number {{item.fromStationDetails.platForm}}
+            </div>
+          </div>
         </div>
       </div>
       <div class="card-body">
@@ -21,7 +32,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{comp}}</h5>
                 <p class="card-text">AVAILABLE-{{item.availability.compartmentTypes[comp].available}}</p>
-                <a class="btn btn-primary" (click)="book(comp,item)">Buy Now</a>
+                <a class="btn btn-primary"  (click)="book(comp,item)">Buy Now</a>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { Station } from '../Models/Station';
@@ -13,6 +13,7 @@ import { NgSelectComponent } from '@ng-select/ng-select'
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+  @Input() rid:string=''
   form: FormGroup;
   stations:Station[];
   result: any;
@@ -23,13 +24,13 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
     this.creatForm();
-    // this.routeservice.GetOneRouteById("9fed2dfd-6897-408d-ac74-c8e22bb5e66b").subscribe({next:(res)=> {
-    //   console.log(res);
-    //   for (let index = 0; index <(res.stations.length)-1; index++) {      
-    //     this.addNewstation()
-    //   }
-    //   this.form.patchValue(res)
-    // },}); 
+    this.routeservice.GetOneRouteById(this.rid).subscribe({next:(res)=> {
+      console.log(res);
+      for (let index = 0; index <(res.stations.length)-1; index++) {      
+        this.addNewstation()
+      }
+      this.form.patchValue(res)
+    },}); 
     this.train.GetAllTrains().subscribe(res => this.Trains = res)    
     this.train.GetAllStations().subscribe(res => this.stations = res)
   }

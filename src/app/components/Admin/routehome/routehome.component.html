@@ -1,0 +1,31 @@
+<div *ngIf="!isRoute" class="container mt-2">
+  <button class="btn btn-primary" routerLink="Add"> Add Route</button>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Train Name</th>
+          <th scope="col">From Station</th>
+          <th scope="col">To Station</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of routes">
+          <td>{{ item.trainName }}</td>
+          <td>{{ item.fromStationName }}</td>
+          <td>{{ item.toStationName }}</td>
+         
+          <td>
+            <a class="btn btn-sm btn-primary mx-1" (click)="viewroute(item.rId)">
+              <i class="bi bi-binoculars-fill"></i>
+            </a>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="container" *ngIf="isRoute">
+
+    <app-test [rid]="selectedrouteid"></app-test>
+  </div>

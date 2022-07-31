@@ -3,6 +3,7 @@ import { Train } from 'src/app/Models/Train';
 import { TrainRes } from 'src/app/Models/trainres';
 import { TrainServiceService } from 'src/app/Service/train-service.service';
 import { NgSelectComponent } from '@ng-select/ng-select'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-train',
@@ -42,7 +43,8 @@ export class EditTrainComponent implements OnInit {
   allstations: any[] = [];
   traindetails: any = {}
   keyword = 'stationName';
-  constructor(private train: TrainServiceService) { }
+  constructor(private train: TrainServiceService,
+    private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.train.GetAllStations().subscribe(res => this.allstations = res);
@@ -70,6 +72,13 @@ export class EditTrainComponent implements OnInit {
     this.model.fromStation = item.sId;
   }
   onsubmit() {
-    this.goback();
+    window.location.reload();
+  }
+  update(){
+    this.train.UpdateTrain(this.model).subscribe({next:(res:any)=>{
+      this.toastr.success(res.rData);
+    }})
+    console.log(this.model);
+    
   }
 }

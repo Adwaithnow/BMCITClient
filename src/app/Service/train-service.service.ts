@@ -35,5 +35,8 @@ export class TrainServiceService {
    GetOnTrainById(id:any): Observable <any> {
     return this.http.get(`${this.baseUrl}Train/GetOneTrainById/${id}`); 
    }
+   UpdateTrain(AddTrain:TrainRes){
+    return this.http.post<TrainRes>(this.baseUrl+"Train/UpdateTrain",AddTrain)
+  }
    
 }

@@ -78,7 +78,7 @@
       <div class="row align-items-center g-lg-5 py-5  ">
         <div class="col-lg-7 text-center text-lg-start text-white bg-dark py-4">
           <h1 class="display-4 fw-bold lh-1 mb-3  text-white">BMCIT</h1>
-          <p class="col-lg-10 fs-4">Book My Chair In Train is the expansion of BMCIT.The project using Angular and Asp.net Core WebApi to make all the transaction</p>
+          <p class="col-lg-10 fs-4">Book My Chair In Train is the expansion of BMCIT.The project uses Angular and Asp.net Core WebApi to book chairs on the train</p>
         </div>
         <div class="col-md-10 mx-auto col-lg-5">
           <form  class="row g-4 bg-light border rounded-3 p-4" [formGroup]="form" >
@@ -158,7 +158,7 @@
                   class="form-control"
                   #datepickerYMD="bsDatepicker"
                   bsDatepicker
-                 
+                  [minDate]="today"
                   formControlName="date"
                   [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',isAnimated: true }">
                     

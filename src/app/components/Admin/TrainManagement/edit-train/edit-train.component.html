@@ -80,8 +80,9 @@
       </label>
     </div> -->
   </div>
+
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid" (click)="update()">submit</button>
     <button class="btn btn-primary" (click)="goback()">Goback</button>
 
   </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { ToastrService } from 'ngx-toastr';
 import { Station } from 'src/app/Models/Station';
 import { TrainRes } from 'src/app/Models/trainres';
 import { RouteService } from 'src/app/Service/route.service';
@@ -16,7 +18,9 @@ export class RouteManagementComponent implements OnInit {
   stations:Station[];
   result: any;
   Trains: TrainRes[];
-  constructor(public fb: FormBuilder, private train: TrainServiceService,private routeservice:RouteService) { }
+  constructor(public fb: FormBuilder, private train: TrainServiceService,private routeservice:RouteService,private toastr:ToastrService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.creatForm();
@@ -40,12 +44,12 @@ export class RouteManagementComponent implements OnInit {
     return this.fb.group(
       {
         stationId: ['',Validators.required],
-        platForm: [],
-        timeArrival:[],
-        timeDeparture:[],
-        distance:[],
-        haltTime:[],
-        day:[]
+        platForm: [,Validators.required],
+        timeArrival:[,Validators.required],
+        timeDeparture:[,Validators.required],
+        distance:[,Validators.required],
+        haltTime:[,Validators.required],
+        day:[,Validators.required]
       }
     );
   }
@@ -60,7 +64,12 @@ export class RouteManagementComponent implements OnInit {
   onSave() {
     console.log(this.form.getRawValue())
     this.result = this.form.getRawValue();
-    this.routeservice.AddRoute(this.form.getRawValue()).subscribe()
+    this.routeservice.AddRoute(this.form.getRawValue()).subscribe({
+      next:(res:any)=>{
+        this.toastr.success(res.rData)
+        this.router.navigate(['Admin/Route']);
+      }
+    })
   }
 
   addNewstation() {

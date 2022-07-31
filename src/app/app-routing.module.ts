@@ -15,6 +15,8 @@ import { SearchstationComponent } from './components/Shared/searchstation/search
 import { ShomeComponent } from './components/Admin/StationManagement/shome/shome.component';
 import { ChartComponent } from './components/Admin/chart/chart.component';
 import { CharthomeComponent } from './components/Admin/charthome/charthome.component';
+import { RouteManagementComponent } from './components/Admin/route-management/route-management.component';
+import { RoutehomeComponent } from './components/Admin/routehome/routehome.component';
 
 const routes: Routes = [
   {path:'',component:VhomeComponent},
@@ -25,13 +27,13 @@ const routes: Routes = [
   {path:"Admin/Booking",component:BookingComponent},
   {path:"Admin/Chart",component:CharthomeComponent},
   {path:"Admin/Chart/Add",component:ChartComponent},
-
-
+  {path:"Admin/Route/Add",component:RouteManagementComponent},
+  {path:"Admin/Route",component:RoutehomeComponent},
   //Experimentation Module
   {path:"Test",component:TestComponentComponent},
   {path:"test1",component:TestComponent},
   //User Module
-  {path:"User/Home",component:UhomeComponent,canActivate:[AuthGuard], data:{roles:["User"]}},
+  {path:"User/Home",component:HistoryComponent,canActivate:[AuthGuard], data:{roles:["User"]}},
   {path:"User/bookings",component:HistoryComponent,data:{roles:["User"]}},
   {path:"Login",component:LoginComponent},
   {path:"Signup",component:SignupComponent},

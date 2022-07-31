@@ -1,6 +1,6 @@
 <div *ngIf="!chkout" class="container">
   <div class="form-group">
-    <label for="contactMethod">Contact method</label>
+    <label for="contactMethod">Select Coach</label>
     <select 
         name="contactMethod" 
         id="contactMethod" 
@@ -57,14 +57,14 @@
     
     <!-- <div class="exit exit--back train-body"></div> -->
   </div>
-  <button (click)="gotochekout()">Go to chckout</button> 
+  <button [disabled]="Seat.length==0" class="btn btn-primary" (click)="gotochekout()">Go to chckout</button> 
 </div>
 <div class="container">
   <app-checkout *ngIf="chkout" [Seats]="Seat" [SelectedCompart]="selectedcompartment" [coachName]="SelectedCoach" [SearchResultsChkout]="SearchResults"></app-checkout>
 
 </div>
 
-<pre>
+<!-- <pre>
    
       {{ Seat | json }}
-  </pre>
+  </pre> -->

@@ -15,5 +15,8 @@ export class RouteService {
   GetOneRouteById(id:string){
     return this.http.get<any>(this.baseUrl+"Route/GetOneRoutesById/"+id)
   }
+  GetAllRouteForAdmin(){
+    return this.http.get<any[]>(this.baseUrl+"TrainUser/GetAllRoutesAdmin")
+  }
   
 }

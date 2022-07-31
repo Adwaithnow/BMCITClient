@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
 import { PassengerDetailsComponent } from 'src/app/components/Shared/passenger-details/passenger-details.component';
 import { BookingService } from 'src/app/Service/booking.service';
 import { UserAuthService } from 'src/app/Service/user-auth.service';
@@ -18,6 +20,8 @@ export class HistoryComponent implements OnInit {
   Passngrs:any[];
   constructor(private booking:BookingService,
     private userAuthService:UserAuthService,
+    private toastr:ToastrService,
+    private router:Router,
     private jwtHelper:JwtHelperService) { }
 
   ngOnInit(): void {
@@ -55,6 +59,11 @@ export class HistoryComponent implements OnInit {
   }
   cancel(id:string){
     console.log(id);
+    
+    this.booking.CancelBookingById(id).subscribe({next:(res:any)=>{
+      this.toastr.success(res.rData);
+      window.location.reload();
+    }})
     
   }
   passengers(pass:any){

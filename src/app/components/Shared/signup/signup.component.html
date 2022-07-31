@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div
     class="row justify-content-center align-items-center"
     style="height: 100vh"
@@ -23,6 +23,7 @@
               ngModel
               name="firstName"
               required=""
+              
               autofocus=""
             />
             <label for="FirstName" class="sr-only">Last Name</label>
@@ -59,6 +60,93 @@
             />
             <div class="mt-2 mb-3">
               <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Sign in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="container">
+  <div
+    class="row justify-content-center align-items-center"
+    style="height: 100vh"
+  >
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body display:block">
+          <form class="form-signin" [formGroup]="form">
+            <img
+              class="rounded mx-auto d-block"
+              src="../../assets/Img/Logo/logo2.svg"
+              alt=""
+              width="200"
+              height="150"
+            />
+
+            <p class="mb-3 text-center font-weight-normal">Signup</p>
+            <label for="FirstName" class="sr-only">FirstName</label>
+            <input
+              type="text"
+              id="FirstName"
+              class="form-control"
+              placeholder="FirstName"
+              formControlName="firstName"
+              required=""
+              [ngClass]="{ 'is-invalid':form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)}"
+
+              autofocus=""
+            />
+            <div *ngIf="form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)" class="invalid-feedback">
+              <div >Name Must be 5 charater and doesnt contain any space</div>
+            </div>
+           
+            <label for="FirstName" class="sr-only">Last Name</label>
+            <input
+              type="text"
+              id="LastName"
+              class="form-control"
+              placeholder="LastName"
+              formControlName="lastName"
+              [ngClass]="{ 'is-invalid':form.get('lastName')?.invalid && (form.get('lastName')?.dirty || form.get('lastName')?.touched)}"
+            />
+            <div *ngIf="form.get('lastName')?.invalid && (form.get('lastName')?.dirty || form.get('lastName')?.touched)" class="invalid-feedback">
+              <div >Name Must be 5 charater and doesnt contain any space</div>
+            </div>
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input
+              type="text"
+              id="inputEmail"
+              class="form-control"
+              placeholder="Username"
+              formControlName="email"
+              [ngClass]="{ 'is-invalid':form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)}"
+
+            />
+            <div *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)" class="invalid-feedback">
+              <div >Username must be 4 character</div>
+            </div>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input
+              type="password"
+              id="inputPassword"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password"
+              [ngClass]="{ 'is-invalid':form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)}"
+            />
+            <div *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)" class="invalid-feedback">
+              <div >Password must be 4 charater</div>
+            </div>
+            <div class="mt-2 mb-3">
+              <button
+                class="btn btn-lg btn-primary btn-block"
+                type="submit"
+                [disabled]="form.invalid"
+                (click)=" signup()"
+              >
                 Sign in
               </button>
             </div>

@@ -27,7 +27,11 @@
         </li>
         <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
           <a class="nav-link" routerLink="/Admin"
-           routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Admin</a>
+           routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Train</a>
+        </li>
+        <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
+          <a class="nav-link" routerLink="Admin/Route"
+           routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Route</a>
         </li>
         <li class="nav-item" *ngIf="userService.roleMatch(['Admin'])">
           <a class="nav-link" routerLink="/Admin/Station" 
@@ -44,9 +48,7 @@
         <li class="nav-item" >
           <a class="nav-link"[routerLink]="['SearchStation']" routerLinkActive="active" >Search Station</a>
         </li>
-        <li class="nav-item" *ngIf="userService.roleMatch(['User'])">
-          <a class="nav-link"  [routerLink]="['User/Home']" routerLinkActive="active">User</a>
-        </li>
+  
         <li class="nav-item" *ngIf="userService.roleMatch(['User'])">
           <a class="nav-link"[routerLink]="['User/bookings']" routerLinkActive="active" >Booking</a>
         </li>

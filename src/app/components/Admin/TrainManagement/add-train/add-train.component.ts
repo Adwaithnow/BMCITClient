@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TrainServiceService } from '../../../../Service/train-service.service';
 import { Train } from '../../../../Models/Train';
 import { TrainRes } from 'src/app/Models/trainres';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-train',
   templateUrl: './add-train.component.html',
@@ -22,7 +23,8 @@ export class AddTrainComponent implements OnInit {
   allstations: any[] = [];
   DaysRun: any[] = [];
   keyword = 'stationName';
-  constructor(private train: TrainServiceService) { }
+  constructor(private train: TrainServiceService,
+    private toastr:ToastrService) { }
   additem(id: number) {
     if (this.DaysRun.indexOf(id) > -1) {
       for (var i = 0; i < this.DaysRun.length; i++) {
@@ -41,6 +43,8 @@ export class AddTrainComponent implements OnInit {
   onsubmit() {
     this.model.daysRun=this.DaysRun
     this.train.AddTrain(this.model).subscribe({next:(data:any)=>{
+      this.toastr.success(data.rData)
+      window.location.reload()
     }});
 
     document.getElementById('close')?.click(); 

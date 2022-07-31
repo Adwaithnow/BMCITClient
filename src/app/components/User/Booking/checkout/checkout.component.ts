@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BookingService } from 'src/app/Service/booking.service';
 import { UserAuthService } from 'src/app/Service/user-auth.service';
@@ -15,7 +16,7 @@ export class CheckoutComponent implements OnInit {
   @Input() coachName:string;
   faredetails:any;
   totalfare:any;
-  uid:string;
+  uid:string="";
   timeofjourney:string;
   @Input() SearchResultsChkout:any
   SelectedSeats: any[] = [];
@@ -25,14 +26,19 @@ export class CheckoutComponent implements OnInit {
   constructor(public fb: FormBuilder,
     private jwtHelper:JwtHelperService,
     private userAuthService:UserAuthService,
-    private book:BookingService
+    private book:BookingService,
+    private router:Router
     ) { }
 
   ngOnInit(): void {
     this.faredetails=fareDetails[this.SelectedCompart]
     this.totalfare=this.calculatetciketfare();
     const token=this.jwtHelper.decodeToken(this.userAuthService.getToken())
+    if(!token){
+      this.router.navigate(["/Login"])
+    }
     this.uid=token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+   
     this.timeofjourney=this.SearchResultsChkout.stations.find((x:any)=>x.stationId==this.SearchResultsChkout.fromStation).timeArrival;
     const userid=token
     this.creatForm();
@@ -97,6 +103,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.result);
     this.book.AddBooking(this.result).subscribe({
       next:(res:any)=>{
+        this.router.navigate(['User/bookings'])
         console.log("Success");
       },error:(err:any)=>{
         console.log(err);
